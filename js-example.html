@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>
+  Species
+  <select name="species" id="input_species">
+    <option value="Adelie">Adelie</option>
+    <option value="Gentoo">Gentoo</option>
+    <option value="Chinstrap">Chinstrap</option>
+  </select>
+</p>
+
+<p>
+  Island
+  <select name="island" id="input_island">
+    <option value="Torgersen">Torgersen</option>
+    <option value="Biscoe">Biscoe</option>
+    <option value="Dream">Dream</option>
+  </select>
+</p>
+
+<p>
+  Bill Length (mm)
+  <input id="input_bill_length_mm" type="range" min="0" max="50" step="any" />
+</p>
+  
+<p>
+  bill Depth (mm)
+  <input id="input_bill_depth_mm" type="range" min="0" max="50" step="any" />
+</p>
+  
+<p>
+  Flipper Length (mm)
+  <input id="input_flipper_length_mm" type="range" min="0" max="200" step="any" />
+</p>
+
+<p>
+  Sex
+  <select name="sex" id="input_sex">
+    <option value="male">male</option>
+    <option value="female">female</option>
+    <option value="NA">NA</option>
+  </select>
+</p>
+
+<p>Predicted weight: <output id="value"></output></p>
+
+</body>
+
+<script>
+  function predict(x) {
+    x.species = (x.species == "NA") ? "unknown" : x.species;
+    x.sex = (x.sex == "NA") ? "unknown" : x.sex;
+    x.bill_length_mm = (x.bill_length_mm == "NA") ? 43.3 : x.bill_length_mm;
+    x.species_Chinstrap = (x.species == "Chinstrap") ? 1 : 0;
+    x.sex_male = (x.sex == "male") ? 1 : 0;
+    x.bill_length_mm = x.bill_length_mm / 5.53764488534842
+    x.species_Chinstrap = x.species_Chinstrap / 0.39721765160312
+    x.sex_male = x.sex_male / 0.500841815855869
+    x.bill_length_mm = x.bill_length_mm - 7.89221731979121
+    x.species_Chinstrap = x.species_Chinstrap - 0.491701461935901
+    x.sex_male = x.sex_male - 1.02171730434597
+
+    if (x.sex_male <= -1.02171730434597 & x.bill_length_mm <= -0.217474558216316) {
+      res = 3394.140625;
+    } else if (x.sex_male > -1.02171730434597 & x.bill_length_mm <= -0.217474558216316) {
+      res = 3985.09615384615;
+    } else if (x.species_Chinstrap <= -0.491701461935901 & x.bill_length_mm > -0.217474558216316) {
+      res = 4980.37634408602;
+    } else if (x.species_Chinstrap > -0.491701461935901 & x.bill_length_mm > -0.217474558216316) {
+      res = 3757.97872340426;
+    }
+    return res;
+  }
+
+  const input_species = document.querySelector("#input_species");
+  const input_island = document.querySelector("#input_island");
+  const input_bill_length_mm = document.querySelector("#input_bill_length_mm");
+  const input_bill_depth_mm = document.querySelector("#input_bill_depth_mm");
+  const input_flipper_length_mm = document.querySelector("#input_flipper_length_mm");
+  const input_sex = document.querySelector("#input_sex");
+  
+  const data = {
+    species: input_species.value,
+    island: input_island.value,
+    bill_length_mm: input_bill_length_mm.value,
+    input_bill_depth_mm: input_bill_depth_mm.value,
+    flipper_length_mm: input_flipper_length_mm.value,
+    sex: input_sex.value
+  }
+
+  const value = document.querySelector("#value");
+  value.textContent = predict(data);
+
+  input_species.addEventListener("input", (event) => {
+    data.species = input_species.value;
+    value.textContent = predict(data);
+  });
+  input_island.addEventListener("input", (event) => {
+    data.island = input_island.value;
+    value.textContent = predict(data);
+  });
+  input_bill_length_mm.addEventListener("input", (event) => {
+    data.bill_length_mm = input_bill_length_mm.value;
+    value.textContent = predict(data);
+  });
+  input_bill_depth_mm.addEventListener("input", (event) => {
+    data.bill_depth_mm = input_bill_depth_mm.value;
+    value.textContent = predict(data);
+  });
+  input_flipper_length_mm.addEventListener("input", (event) => {
+    data.flipper_length_mm = input_flipper_length_mm.value;
+    value.textContent = predict(data);
+  });
+  input_sex.addEventListener("input", (event) => {
+    data.sex = input_sex.value;
+    value.textContent = predict(data);
+  });
+  
+  </script>
+</html>
+

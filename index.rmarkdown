@@ -1,0 +1,742 @@
+---
+format:
+  revealjs: 
+    theme: [default, styles.scss]
+    width: 1280
+    height: 720
+    include-after-body: 
+      - "all-the-js-code.html"
+echo: true
+code-line-numbers: false
+menu: false
+editor:
+  render-on-save: true
+filters:
+  - shinylive
+---
+
+
+## {.center}
+
+:::: r-fit-text
+Tidypredict with recipes
+
+turn workflow to SQL, spark, 
+
+duckdb and beyond
+:::
+
+## {.center}
+
+:::: {.r-fit-text}
+You have your final model
+
+:::: fragment
+What now?
+:::
+:::
+
+:::: fragment
+prediction
+:::
+
+##
+
+
+```{r}
+library(tidymodels)
+library(bonsai)
+
+set.seed(1234)
+
+data(penguins, package = "modeldata")
+
+penguins_split <- initial_split(drop_na(penguins, body_mass_g))
+penguins_train <- training(penguins_split)
+penguins_test <- testing(penguins_split)
+
+rec_spec <- recipe(body_mass_g ~ ., data = penguins_train) |>
+  step_unknown(all_nominal_predictors()) |>
+  step_impute_median(all_numeric_predictors()) |>
+  step_dummy(all_nominal_predictors()) |>
+  step_nzv(all_predictors()) |>
+  step_scale(all_numeric_predictors()) |>
+  step_center(all_numeric_predictors()) |>
+  step_corr(all_predictors(), threshold = 0.5)
+
+tree_spec <- decision_tree(tree_depth = 2) |>
+  set_mode("regression") |>
+  set_engine("partykit")
+
+wf_spec <- workflow(rec_spec, tree_spec)
+wf_fit <- fit(wf_spec, penguins_train)
+```
+
+
+##
+
+
+```{r}
+predict(wf_fit, penguins_test)
+```
+
+
+##
+
+:::: {.columns}
+:::: {.column}
+
+:::: r-fit-text
+{tidypredict}
+:::
+
+>  Enables running predictions inside databases
+
+1. Parses model
+2. extract sufficient information
+3. creates R formula that can be translated to SQL
+
+:::
+:::: {.column}
+
+![](logo.png)
+:::
+:::
+
+##
+
+{tidypredict} offers support for many types of models
+
+- Linear Regression - `lm()`
+- Generalized Linear model - `glm()`
+- Random Forest models - `randomForest::randomForest()`
+- Random Forest models, via `ranger` - `ranger::ranger()`
+- MARS models - `earth::earth()`
+- XGBoost models - `xgboost::xgb.Booster.complete()` 
+- Cubist models - `Cubist::cubist()` 
+- Tree models, via `partykit` - `partykit::ctree()` 
+
+## Why did talk?
+
+tidypredict is limited to 1 equation which makes:
+
+- recipes support very hard
+- for redundant calculations
+- classification probabilities awkward
+
+##
+
+TODO: FANCY graphics
+
+orbital accouncement
+
+## How does it work?
+
+TODO: fancy graphic showing a blackbox model, then we peel it back to show a lot of math
+
+```md
+Fitted party:
+[1] root
+|   [2] bill_length_mm <= -0.22359
+|   |   [3] sex_male <= -0.92289: 3414.552 (n = 67, err = 8536436.6)
+|   |   [4] sex_male > -0.92289: 3989.205 (n = 44, err = 5141747.2)
+|   [5] bill_length_mm > -0.22359
+|   |   [6] species_Chinstrap <= -0.48558: 4968.182 (n = 99, err = 26352272.7)
+|   |   [7] species_Chinstrap > -0.48558: 3783.152 (n = 46, err = 6315067.9)
+```
+
+## How does it work?
+
+```r
+if (bill_length_mm <= -0.2235864) {
+  if(sex_male <= -0.92289) {
+    return(3414.552)
+  } else {
+    return(3989.205)
+  }
+} else {
+  if (species_Chinstrap <= -0.48558) {
+    return(4968.182)
+  } else {
+    return(3783.152)
+  }
+}
+```
+
+## How does it work?
+
+```r
+case_when(
+  sex_male <= -0.9228935 & bill_length_mm <= -0.2235864 ~ 3414.552, 
+  sex_male > -0.9228935 & bill_length_mm <= -0.2235864 ~ 3989.205,
+  species_Chinstrap <= -0.4855824 & bill_length_mm > -0.2235864 ~ 4968.182,
+  species_Chinstrap > -0.4855824 & bill_length_mm > -0.2235864 ~ 3783.152
+)
+```
+
+## How do workflows work?
+
+```r
+rec_spec <- recipe(body_mass_g ~ ., data = penguins_train) |>
+  step_unknown(all_nominal_predictors()) |>
+  step_impute_median(all_numeric_predictors()) |>
+  step_dummy(all_nominal_predictors()) |>
+  step_nzv(all_predictors()) |>
+  step_scale(all_numeric_predictors()) |>
+  step_center(all_numeric_predictors()) |>
+  step_corr(all_predictors(), threshold = 0.5)
+
+tree_spec <- decision_tree(tree_depth = 2) |>
+  set_mode("regression") |>
+  set_engine("partykit")
+
+wf_spec <- workflow(rec_spec, tree_spec)
+```
+
+## 
+
+:::: {.mono style="font-size: 15px;"}
+:::: {.fragment .tmp-hl-orange fragment-index=1}
+[species = dplyr::if_else(is.na(species), "unknown", species)]{.fragment .hl-orange fragment-index=13}  
+[island = dplyr::if_else(is.na(island), "unknown", island)]{.fragment .hl-grey fragment-index=13}  
+[sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.fragment .hl-orange fragment-index=13}  
+:::
+:::: {.fragment .tmp-hl-orange fragment-index=2}
+[bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.fragment .hl-orange fragment-index=12}  
+[bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.fragment .hl-grey fragment-index=12}  
+[flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.fragment .hl-grey fragment-index=12}  
+:::
+:::: {.fragment .tmp-hl-orange fragment-index=3}
+[species_Adelie = as.numeric(species == "Adelie")]{.fragment .hl-grey fragment-index=11}  
+[species_Chinstrap = as.numeric(species == "Chinstrap")]{.fragment .hl-orange fragment-index=11}  
+[species_Gentoo = as.numeric(species == "Gentoo")]{.fragment .hl-grey fragment-index=11}  
+[species_unknown = as.numeric(species == "unknown")]{.fragment .hl-grey fragment-index=11}  
+[island_Biscoe = as.numeric(island == "Biscoe")]{.fragment .hl-grey fragment-index=11}  
+[island_Dream = as.numeric(island == "Dream")]{.fragment .hl-grey fragment-index=11}  
+[island_Torgersen = as.numeric(island == "Torgersen")]{.fragment .hl-grey fragment-index=11}  
+[island_unknown = as.numeric(island == "unknown")]{.fragment .hl-grey fragment-index=11}  
+[sex_female = as.numeric(sex == "female")]{.fragment .hl-grey fragment-index=11}  
+[sex_male = as.numeric(sex == "male")]{.fragment .hl-orange fragment-index=11}  
+[sex_unknown = as.numeric(sex == "unknown")]{.fragment .hl-grey fragment-index=11}  
+:::
+:::: {.fragment .tmp-hl-orange fragment-index=4}
+[bill_length_mm = bill_length_mm / 5.451399]{.fragment .hl-orange fragment-index=10}  
+[bill_depth_mm = bill_depth_mm / 1.98353]{.fragment .hl-grey fragment-index=10}  
+[flipper_length_mm = flipper_length_mm / 14.04647]{.fragment .hl-grey fragment-index=10}  
+[species_Chinstrap = species_Chinstrap / 0.4001953]{.fragment .hl-orange fragment-index=10}  
+[species_Gentoo = species_Gentoo / 0.484043]{.fragment .hl-grey fragment-index=10}  
+[island_Dream = island_Dream / 0.4795927]{.fragment .hl-grey fragment-index=10}  
+[island_Torgersen = island_Torgersen / 0.3562296]{.fragment .hl-grey fragment-index=10}  
+[sex_male = sex_male / 0.5002297]{.fragment .hl-orange fragment-index=10}  
+:::
+:::: {.fragment .tmp-hl-orange fragment-index=5}
+[bill_length_mm = bill_length_mm - 8.04911]{.fragment .hl-orange fragment-index=8}  
+[bill_depth_mm = bill_depth_mm - 8.628085]{.fragment .hl-grey fragment-index=9}  
+[flipper_length_mm = flipper_length_mm - 14.32021]{.fragment .hl-grey fragment-index=9}  
+[species_Chinstrap = species_Chinstrap - 0.4978039]{.fragment .hl-orange fragment-index=8}  
+[species_Gentoo = species_Gentoo - 0.7666532]{.fragment .hl-grey fragment-index=9}  
+[island_Dream = island_Dream - 0.7411888]{.fragment .hl-grey fragment-index=9}  
+[island_Torgersen = island_Torgersen - 0.4166906]{.fragment .hl-grey fragment-index=9}  
+[sex_male = sex_male - 0.9448784]{.fragment .hl-orange fragment-index=8}  
+:::
+:::: {.fragment .tmp-hl-orange fragment-index=6}
+.pred = case_when([sex_male]{.fragment .hl-orange fragment-index=7} <= -0.9448784 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} <= -0.2162576 ~ 3425.781, [sex_male]{.fragment .hl-orange fragment-index=7} > -0.9448784 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} <= -0.2162576 ~ 4028.804, [species_Chinstrap]{.fragment .hl-orange fragment-index=7} <= -0.4978039 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} > -0.2162576 ~ 5008.838, [species_Chinstrap]{.fragment .hl-orange fragment-index=7} > -0.4978039 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} > -0.2162576 ~ 3786.702)
+:::
+:::
+
+## {auto-animate="true"}
+
+:::: {.mono style="font-size: 15px;"}
+[species = dplyr::if_else(is.na(species), "unknown", species)]{.text-orange}  
+
+[island = dplyr::if_else(is.na(island), "unknown", island)]{.text-grey}  
+
+[sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.text-orange}  
+
+[bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.text-orange}  
+
+[bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.text-grey}  
+
+[flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.text-grey}  
+
+[species_Adelie = as.numeric(species == "Adelie")]{.text-grey}  
+
+[species_Chinstrap = as.numeric(species == "Chinstrap")]{.text-orange}  
+
+[species_Gentoo = as.numeric(species == "Gentoo")]{.text-grey}  
+
+[species_unknown = as.numeric(species == "unknown")]{.text-grey}  
+
+[island_Biscoe = as.numeric(island == "Biscoe")]{.text-grey}  
+
+[island_Dream = as.numeric(island == "Dream")]{.text-grey}  
+
+[island_Torgersen = as.numeric(island == "Torgersen")]{.text-grey}  
+
+[island_unknown = as.numeric(island == "unknown")]{.text-grey}  
+
+[sex_female = as.numeric(sex == "female")]{.text-grey}  
+
+[sex_male = as.numeric(sex == "male")]{.text-orange}  
+
+[sex_unknown = as.numeric(sex == "unknown")]{.text-grey}  
+
+[bill_length_mm = bill_length_mm / 5.451399]{.text-orange}  
+
+[bill_depth_mm = bill_depth_mm / 1.98353]{.text-grey}  
+
+[flipper_length_mm = flipper_length_mm / 14.04647]{.text-grey}  
+
+[species_Chinstrap = species_Chinstrap / 0.4001953]{.text-orange}  
+
+[species_Gentoo = species_Gentoo / 0.4840438]{.text-grey}  
+
+[island_Dream = island_Dream / 0.4795927]{.text-grey}  
+
+[island_Torgersen = island_Torgersen / 0.3562296]{.text-grey}  
+
+[sex_male = sex_male / 0.5002297]{.text-orange}  
+
+[bill_length_mm = bill_length_mm - 8.04911]{.text-orange}  
+
+[bill_depth_mm = bill_depth_mm - 8.628085]{.text-grey}  
+
+[flipper_length_mm = flipper_length_mm - 14.32021]{.text-grey}  
+
+[species_Chinstrap = species_Chinstrap - 0.4978039]{.text-orange}  
+
+[species_Gentoo = species_Gentoo - 0.7666532]{.text-grey}  
+
+[island_Dream = island_Dream - 0.7411888]{.text-grey}  
+
+[island_Torgersen = island_Torgersen - 0.4166906]{.text-grey}  
+
+[sex_male = sex_male - 0.9448784]{.text-orange}  
+
+.pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.2162576 ~ 3425.781, sex_male > -0.9448784 & bill_length_mm <= -0.2162576 ~ 4028.804, species_Chinstrap <= -0.4978039 & bill_length_mm > -0.2162576 ~ 5008.838, species_Chinstrap > -0.4978039 & bill_length_mm > -0.2162576 ~ 3786.702)
+:::
+
+## {auto-animate="true"}
+
+:::: {.mono .margin style="font-size: 24px;"}
+species = dplyr::if_else(is.na(species), "unknown", species)  
+
+sex = dplyr::if_else(is.na(sex), "unknown", sex)  
+
+bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)  
+
+species_Chinstrap = as.numeric(species == "Chinstrap")  
+
+sex_male = as.numeric(sex == "male")  
+
+bill_length_mm = bill_length_mm / 5.451399  
+
+species_Chinstrap = species_Chinstrap / 0.4001953  
+
+sex_male = sex_male / 0.5002297  
+
+bill_length_mm = bill_length_mm - 8.04911  
+
+species_Chinstrap = species_Chinstrap - 0.4978039  
+
+sex_male = sex_male - 0.9448784  
+
+.pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.2162576 ~ 3425.781, sex_male > -0.9448784 & bill_length_mm <= -0.2162576 ~ 4028.804, species_Chinstrap <= -0.4978039 & bill_length_mm > -0.2162576 ~ 5008.838, species_Chinstrap > -0.4978039 & bill_length_mm > -0.2162576 ~ 3786.702)
+:::
+
+## using orbital
+
+use main function `orbital()` on fitted workflow
+
+
+```{r}
+library(orbital)
+
+orbital_obj <- orbital(wf_fit)
+orbital_obj
+```
+
+
+:::: fragment
+
+```md
+── orbital Object ────────────────────────────────────────────────────────────────────────────────
+• species = dplyr::if_else(is.na(species), "unknown", species)
+• sex = dplyr::if_else(is.na(sex), "unknown", sex)
+• bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.5, bill_length_mm)
+• species_Chinstrap = as.numeric(species == "Chinstrap")
+• sex_male = as.numeric(sex == "male")
+• bill_length_mm = bill_length_mm / 5.478623
+• species_Chinstrap = species_Chinstrap / 0.4001953
+• sex_male = sex_male / 0.5002297
+• bill_length_mm = bill_length_mm - 8.012036
+• species_Chinstrap = species_Chinstrap - 0.4978039
+• sex_male = sex_male - 0.9448784
+• .pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.1268424 ~ 3467.958, sex_m ...
+──────────────────────────────────────────────────────────────────────────────────────────────────
+12 equations in total.
+```
+:::
+
+## 
+
+## 
+
+:::: {.columns}
+:::: {.column}
+
+### Prediction
+
+:::
+:::: {.column}
+
+### Code Generation
+
+:::
+:::
+
+## 
+
+:::: {.columns}
+:::: {.column}
+
+### Prediction
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, penguins_test)
+```
+
+
+:::
+:::
+
+##
+
+:::: {.columns}
+:::: {.column}
+
+
+```{r}
+predict(wf_fit, penguins_test)
+```
+
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, penguins_test)
+```
+
+
+:::
+:::
+
+## predicting with tibble {auto-animate="true"}
+
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+
+new_penguins <- penguins_test
+```
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, new_penguins)
+```
+
+
+:::
+:::
+
+## predicting with SQL {auto-animate="true"}
+
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+#| echo: true
+library(dbplyr)
+library(RSQLite)
+library(DBI)
+
+con <- dbConnect(SQLite(), path = ":memory:")
+new_penguins <- copy_to(con, penguins_test)
+```
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, new_penguins)
+```
+
+
+:::
+:::
+
+## predicting with spark {auto-animate="true"}
+
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+#| eval: true
+#| echo: true
+library(sparklyr)
+
+con <- spark_connect(master = "local")
+new_penguins <- copy_to(con, penguins_test)
+```
+
+:::
+:::: {.column}
+
+
+```{r}
+#| eval: true
+predict(orbital_obj, new_penguins)
+```
+
+
+:::
+:::
+
+## predicting with duckdb {auto-animate="true"}
+
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+#| echo: true
+library(duckdb)
+
+con <- dbConnect(duckdb(dbdir = ":memory:"))
+new_penguins <- copy_to(con, penguins_test)
+```
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, new_penguins)
+```
+
+
+:::
+:::
+
+## predicting with arrow {auto-animate="true"}
+
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+#| echo: true
+library(arrow)
+
+new_penguins <- as_arrow_table(penguins_test)
+```
+
+:::
+:::: {.column}
+
+
+```{r}
+predict(orbital_obj, new_penguins)
+```
+
+
+:::
+:::
+
+## 
+
+:::: {.columns}
+:::: {.column}
+
+### Prediction
+
+:::
+:::: {.column}
+
+### Code Generation
+
+:::
+:::
+
+## 
+
+:::: {.columns}
+:::: {.column}
+
+:::
+:::: {.column}
+
+### Code Generation
+
+:::
+:::
+
+
+## Exporting SQL
+
+
+```{r}
+orbital_sql(orbital_obj, con)
+```
+
+
+## Shiny code
+
+Generate function
+
+
+```{r}
+orbital_r_fun(orbital_obj, file = "shiny-fun.R")
+```
+
+
+<br>
+
+
+```{r}
+#| echo: false
+readLines("shiny-fun.R") |> cat(sep = "\n")
+```
+
+
+## Shiny code
+
+UI
+
+```r
+library(shiny)
+
+selectInput("species", "species:", c("Adelie", "Gentoo", "Chinstrap"), "Adelie")
+selectInput("island", "island:", c("Torgersen", "Biscoe", "Dream"), "Dream")
+sliderInput("bill_length_mm", "bill_length_mm:", min = 1, max = 50, value = 20)
+sliderInput("bill_depth_mm", "bill_depth_mm:", min = 1, max = 50, value = 20)
+sliderInput("flipper_length_mm", "flipper_length_mm:", min = 1, max = 300, value = 20)
+selectInput("sex", "sex:", c("male", "female", NA), "male")
+
+textOutput("weight")
+```
+
+## Shiny code
+
+Server
+
+```r
+source("shiny-fun.R")
+library(dplyr)
+output$weight <- renderText({
+  .pred <- orbital_predict(data.frame(
+    species = input$species,
+    island = input$island,
+    bill_length_mm = input$bill_length_mm,
+    bill_depth_mm = input$bill_depth_mm,
+    flipper_length_mm = input$flipper_length_mm,
+    sex = input$sex
+  ))
+  .pred
+})
+```
+
+##
+
+```{shinylive-r}
+#| standalone: true
+library(shiny)
+library(bslib)
+library(dplyr)
+
+ui <- flowLayout(
+  selectInput("species", "species:", c("Adelie", "Gentoo", "Chinstrap"), "Adelie"),
+  selectInput("island", "island:", c("Torgersen", "Biscoe", "Dream"), "Dream"),
+  sliderInput("bill_length_mm", "bill_length_mm:", min = 1, max = 50, value = 20),
+  sliderInput("bill_depth_mm", "bill_depth_mm:", min = 1, max = 50, value = 20),
+  sliderInput("flipper_length_mm", "flipper_length_mm:", min = 1, max = 300, value = 20),
+  selectInput("sex", "sex:", c("male", "female", NA), "male"),
+
+  "Predicted weight:",
+  textOutput("weight")
+)
+
+server <- function(input, output) {
+
+  orbital_predict <- function(x) {
+    with(x, {
+       species = dplyr::if_else(is.na(species), "unknown", species)
+       sex = dplyr::if_else(is.na(sex), "unknown", sex)
+       bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 43.3, bill_length_mm)
+       species_Chinstrap = as.numeric(species == "Chinstrap")
+       sex_male = as.numeric(sex == "male")
+       bill_length_mm = bill_length_mm / 5.53764488534842
+       species_Chinstrap = species_Chinstrap / 0.39721765160312
+       sex_male = sex_male / 0.500841815855869
+       bill_length_mm = bill_length_mm - 7.89221731979121
+       species_Chinstrap = species_Chinstrap - 0.491701461935901
+       sex_male = sex_male - 1.02171730434597
+       .pred = case_when(sex_male <= -1.02171730434597 & bill_length_mm <= -0.217474558216316 ~ 3394.140625, sex_male > -1.02171730434597 & bill_length_mm <= -0.217474558216316 ~ 3985.09615384615, species_Chinstrap <= -0.491701461935901 & bill_length_mm > -0.217474558216316 ~ 4980.37634408602, species_Chinstrap > -0.491701461935901 & bill_length_mm > -0.217474558216316 ~ 3757.97872340426)
+      .pred
+      })
+    }
+
+  output$weight <- renderText({
+    .pred <- orbital_predict(data.frame(
+      species = input$species,
+      island = input$island,
+      bill_length_mm = input$bill_length_mm,
+      bill_depth_mm = input$bill_depth_mm,
+      flipper_length_mm = input$flipper_length_mm,
+      sex = input$sex
+    ))
+    .pred
+  })
+
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Pure Javascript prediction
+
+<iframe
+  width="100%"
+  height="700px"
+  src="js-example.html">
+</iframe>
+
+## Why use this package?
+
+- Cons
+    - not all models and recipes are supported
+    - don't get any input checking
+    - very new, be careful
+- Pros
+    - way smaller or no docker containers needed
+    - predictions in databases
+    - code generation
+
+:::: footer
+<https://orbital.tidymodels.org/articles/pros-cons.html>
+:::
+

@@ -1,0 +1,81 @@
+/*-- scss:defaults --*/
+
+$theme-orange: #c78c1d;
+$theme-grey: #d2d2d2;
+
+/*-- scss:rules --*/
+
+.mono {
+  font-family: monospace;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &.margin p {
+    margin-top: 16px;
+  }
+}
+
+.reveal .slides section .fragment.tmp-hl-orange {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.tmp-hl-orange.visible {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.tmp-hl-orange.current-fragment {
+  color: $theme-orange;
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-orange {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-orange.visible {
+  color: $theme-orange;
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-orange.current-fragment {
+  color: $theme-orange;
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-grey {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-grey.visible {
+  color: $theme-grey;
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.hl-grey.current-fragment {
+  color: $theme-grey;
+  opacity: 1;
+  visibility: inherit;
+}
+
+.text-grey {
+  color: $theme-grey;
+}
+
+.text-orange {
+  color: $theme-orange;
+}
+
+.shinylive-wrapper {
+  height: 600px;
+}
