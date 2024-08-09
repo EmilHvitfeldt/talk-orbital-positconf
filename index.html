@@ -574,17 +574,17 @@
 <h2></h2>
 <div class="mono" style="font-size: 15px;">
 <div class="fragment tmp-hl-orange" data-fragment-index="1">
-<p><span class="fragment hl-orange" data-fragment-index="13">species = dplyr::if_else(is.na(species), “unknown”, species)</span><br>
+<div class="line-block"><span class="fragment hl-orange" data-fragment-index="13">species = dplyr::if_else(is.na(species), “unknown”, species)</span><br>
 <span class="fragment hl-grey" data-fragment-index="13">island = dplyr::if_else(is.na(island), “unknown”, island)</span><br>
-<span class="fragment hl-orange" data-fragment-index="13">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></p>
+<span class="fragment hl-orange" data-fragment-index="13">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></div>
 </div>
 <div class="fragment tmp-hl-orange" data-fragment-index="2">
-<p><span class="fragment hl-orange" data-fragment-index="12">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span><br>
+<div class="line-block"><span class="fragment hl-orange" data-fragment-index="12">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span><br>
 <span class="fragment hl-grey" data-fragment-index="12">bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)</span><br>
-<span class="fragment hl-grey" data-fragment-index="12">flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)</span></p>
+<span class="fragment hl-grey" data-fragment-index="12">flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)</span></div>
 </div>
 <div class="fragment tmp-hl-orange" data-fragment-index="3">
-<p><span class="fragment hl-grey" data-fragment-index="11">species_Adelie = as.numeric(species == “Adelie”)</span><br>
+<div class="line-block"><span class="fragment hl-grey" data-fragment-index="11">species_Adelie = as.numeric(species == “Adelie”)</span><br>
 <span class="fragment hl-orange" data-fragment-index="11">species_Chinstrap = as.numeric(species == “Chinstrap”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">species_Gentoo = as.numeric(species == “Gentoo”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">species_unknown = as.numeric(species == “unknown”)</span><br>
@@ -594,27 +594,27 @@
 <span class="fragment hl-grey" data-fragment-index="11">island_unknown = as.numeric(island == “unknown”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">sex_female = as.numeric(sex == “female”)</span><br>
 <span class="fragment hl-orange" data-fragment-index="11">sex_male = as.numeric(sex == “male”)</span><br>
-<span class="fragment hl-grey" data-fragment-index="11">sex_unknown = as.numeric(sex == “unknown”)</span></p>
+<span class="fragment hl-grey" data-fragment-index="11">sex_unknown = as.numeric(sex == “unknown”)</span></div>
 </div>
 <div class="fragment tmp-hl-orange" data-fragment-index="4">
-<p><span class="fragment hl-orange" data-fragment-index="10">bill_length_mm = bill_length_mm / 5.451399</span><br>
+<div class="line-block"><span class="fragment hl-orange" data-fragment-index="10">bill_length_mm = bill_length_mm / 5.451399</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">bill_depth_mm = bill_depth_mm / 1.98353</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">flipper_length_mm = flipper_length_mm / 14.04647</span><br>
 <span class="fragment hl-orange" data-fragment-index="10">species_Chinstrap = species_Chinstrap / 0.4001953</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">species_Gentoo = species_Gentoo / 0.484043</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">island_Dream = island_Dream / 0.4795927</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">island_Torgersen = island_Torgersen / 0.3562296</span><br>
-<span class="fragment hl-orange" data-fragment-index="10">sex_male = sex_male / 0.5002297</span></p>
+<span class="fragment hl-orange" data-fragment-index="10">sex_male = sex_male / 0.5002297</span></div>
 </div>
 <div class="fragment tmp-hl-orange" data-fragment-index="5">
-<p><span class="fragment hl-orange" data-fragment-index="8">bill_length_mm = bill_length_mm - 8.04911</span><br>
+<div class="line-block"><span class="fragment hl-orange" data-fragment-index="8">bill_length_mm = bill_length_mm - 8.04911</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">bill_depth_mm = bill_depth_mm - 8.628085</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">flipper_length_mm = flipper_length_mm - 14.32021</span><br>
 <span class="fragment hl-orange" data-fragment-index="8">species_Chinstrap = species_Chinstrap - 0.4978039</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">species_Gentoo = species_Gentoo - 0.7666532</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">island_Dream = island_Dream - 0.7411888</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">island_Torgersen = island_Torgersen - 0.4166906</span><br>
-<span class="fragment hl-orange" data-fragment-index="8">sex_male = sex_male - 0.9448784</span></p>
+<span class="fragment hl-orange" data-fragment-index="8">sex_male = sex_male - 0.9448784</span></div>
 </div>
 <div class="fragment tmp-hl-orange" data-fragment-index="6">
 <p>.pred = case_when(<span class="fragment hl-orange" data-fragment-index="7">sex_male</span> &lt;= -0.9448784 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 3425.781, <span class="fragment hl-orange" data-fragment-index="7">sex_male</span> &gt; -0.9448784 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 4028.804, <span class="fragment hl-orange" data-fragment-index="7">species_Chinstrap</span> &lt;= -0.4978039 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 5008.838, <span class="fragment hl-orange" data-fragment-index="7">species_Chinstrap</span> &gt; -0.4978039 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 3786.702)</p>

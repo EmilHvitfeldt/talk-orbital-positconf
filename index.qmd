@@ -192,47 +192,47 @@ wf_spec <- workflow(rec_spec, tree_spec)
 
 :::: {.mono style="font-size: 15px;"}
 :::: {.fragment .tmp-hl-orange fragment-index=1}
-[species = dplyr::if_else(is.na(species), "unknown", species)]{.fragment .hl-orange fragment-index=13}  
-[island = dplyr::if_else(is.na(island), "unknown", island)]{.fragment .hl-grey fragment-index=13}  
-[sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.fragment .hl-orange fragment-index=13}  
+| [species = dplyr::if_else(is.na(species), "unknown", species)]{.fragment .hl-orange fragment-index=13}
+| [island = dplyr::if_else(is.na(island), "unknown", island)]{.fragment .hl-grey fragment-index=13}
+| [sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.fragment .hl-orange fragment-index=13}
 :::
 :::: {.fragment .tmp-hl-orange fragment-index=2}
-[bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.fragment .hl-orange fragment-index=12}  
-[bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.fragment .hl-grey fragment-index=12}  
-[flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.fragment .hl-grey fragment-index=12}  
+| [bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.fragment .hl-orange fragment-index=12}
+| [bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.fragment .hl-grey fragment-index=12}
+| [flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.fragment .hl-grey fragment-index=12}
 :::
 :::: {.fragment .tmp-hl-orange fragment-index=3}
-[species_Adelie = as.numeric(species == "Adelie")]{.fragment .hl-grey fragment-index=11}  
-[species_Chinstrap = as.numeric(species == "Chinstrap")]{.fragment .hl-orange fragment-index=11}  
-[species_Gentoo = as.numeric(species == "Gentoo")]{.fragment .hl-grey fragment-index=11}  
-[species_unknown = as.numeric(species == "unknown")]{.fragment .hl-grey fragment-index=11}  
-[island_Biscoe = as.numeric(island == "Biscoe")]{.fragment .hl-grey fragment-index=11}  
-[island_Dream = as.numeric(island == "Dream")]{.fragment .hl-grey fragment-index=11}  
-[island_Torgersen = as.numeric(island == "Torgersen")]{.fragment .hl-grey fragment-index=11}  
-[island_unknown = as.numeric(island == "unknown")]{.fragment .hl-grey fragment-index=11}  
-[sex_female = as.numeric(sex == "female")]{.fragment .hl-grey fragment-index=11}  
-[sex_male = as.numeric(sex == "male")]{.fragment .hl-orange fragment-index=11}  
-[sex_unknown = as.numeric(sex == "unknown")]{.fragment .hl-grey fragment-index=11}  
+| [species_Adelie = as.numeric(species == "Adelie")]{.fragment .hl-grey fragment-index=11}
+| [species_Chinstrap = as.numeric(species == "Chinstrap")]{.fragment .hl-orange fragment-index=11}
+| [species_Gentoo = as.numeric(species == "Gentoo")]{.fragment .hl-grey fragment-index=11}
+| [species_unknown = as.numeric(species == "unknown")]{.fragment .hl-grey fragment-index=11}
+| [island_Biscoe = as.numeric(island == "Biscoe")]{.fragment .hl-grey fragment-index=11}
+| [island_Dream = as.numeric(island == "Dream")]{.fragment .hl-grey fragment-index=11}
+| [island_Torgersen = as.numeric(island == "Torgersen")]{.fragment .hl-grey fragment-index=11}
+| [island_unknown = as.numeric(island == "unknown")]{.fragment .hl-grey fragment-index=11}
+| [sex_female = as.numeric(sex == "female")]{.fragment .hl-grey fragment-index=11}
+| [sex_male = as.numeric(sex == "male")]{.fragment .hl-orange fragment-index=11}
+| [sex_unknown = as.numeric(sex == "unknown")]{.fragment .hl-grey fragment-index=11}
 :::
 :::: {.fragment .tmp-hl-orange fragment-index=4}
-[bill_length_mm = bill_length_mm / 5.451399]{.fragment .hl-orange fragment-index=10}  
-[bill_depth_mm = bill_depth_mm / 1.98353]{.fragment .hl-grey fragment-index=10}  
-[flipper_length_mm = flipper_length_mm / 14.04647]{.fragment .hl-grey fragment-index=10}  
-[species_Chinstrap = species_Chinstrap / 0.4001953]{.fragment .hl-orange fragment-index=10}  
-[species_Gentoo = species_Gentoo / 0.484043]{.fragment .hl-grey fragment-index=10}  
-[island_Dream = island_Dream / 0.4795927]{.fragment .hl-grey fragment-index=10}  
-[island_Torgersen = island_Torgersen / 0.3562296]{.fragment .hl-grey fragment-index=10}  
-[sex_male = sex_male / 0.5002297]{.fragment .hl-orange fragment-index=10}  
+| [bill_length_mm = bill_length_mm / 5.451399]{.fragment .hl-orange fragment-index=10}
+| [bill_depth_mm = bill_depth_mm / 1.98353]{.fragment .hl-grey fragment-index=10}
+| [flipper_length_mm = flipper_length_mm / 14.04647]{.fragment .hl-grey fragment-index=10}
+| [species_Chinstrap = species_Chinstrap / 0.4001953]{.fragment .hl-orange fragment-index=10}
+| [species_Gentoo = species_Gentoo / 0.484043]{.fragment .hl-grey fragment-index=10}
+| [island_Dream = island_Dream / 0.4795927]{.fragment .hl-grey fragment-index=10}
+| [island_Torgersen = island_Torgersen / 0.3562296]{.fragment .hl-grey fragment-index=10}
+| [sex_male = sex_male / 0.5002297]{.fragment .hl-orange fragment-index=10}
 :::
 :::: {.fragment .tmp-hl-orange fragment-index=5}
-[bill_length_mm = bill_length_mm - 8.04911]{.fragment .hl-orange fragment-index=8}  
-[bill_depth_mm = bill_depth_mm - 8.628085]{.fragment .hl-grey fragment-index=9}  
-[flipper_length_mm = flipper_length_mm - 14.32021]{.fragment .hl-grey fragment-index=9}  
-[species_Chinstrap = species_Chinstrap - 0.4978039]{.fragment .hl-orange fragment-index=8}  
-[species_Gentoo = species_Gentoo - 0.7666532]{.fragment .hl-grey fragment-index=9}  
-[island_Dream = island_Dream - 0.7411888]{.fragment .hl-grey fragment-index=9}  
-[island_Torgersen = island_Torgersen - 0.4166906]{.fragment .hl-grey fragment-index=9}  
-[sex_male = sex_male - 0.9448784]{.fragment .hl-orange fragment-index=8}  
+| [bill_length_mm = bill_length_mm - 8.04911]{.fragment .hl-orange fragment-index=8}
+| [bill_depth_mm = bill_depth_mm - 8.628085]{.fragment .hl-grey fragment-index=9}
+| [flipper_length_mm = flipper_length_mm - 14.32021]{.fragment .hl-grey fragment-index=9}
+| [species_Chinstrap = species_Chinstrap - 0.4978039]{.fragment .hl-orange fragment-index=8}
+| [species_Gentoo = species_Gentoo - 0.7666532]{.fragment .hl-grey fragment-index=9}
+| [island_Dream = island_Dream - 0.7411888]{.fragment .hl-grey fragment-index=9}
+| [island_Torgersen = island_Torgersen - 0.4166906]{.fragment .hl-grey fragment-index=9}
+| [sex_male = sex_male - 0.9448784]{.fragment .hl-orange fragment-index=8}
 :::
 :::: {.fragment .tmp-hl-orange fragment-index=6}
 .pred = case_when([sex_male]{.fragment .hl-orange fragment-index=7} <= -0.9448784 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} <= -0.2162576 ~ 3425.781, [sex_male]{.fragment .hl-orange fragment-index=7} > -0.9448784 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} <= -0.2162576 ~ 4028.804, [species_Chinstrap]{.fragment .hl-orange fragment-index=7} <= -0.4978039 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} > -0.2162576 ~ 5008.838, [species_Chinstrap]{.fragment .hl-orange fragment-index=7} > -0.4978039 & [bill_length_mm]{.fragment .hl-orange fragment-index=7} > -0.2162576 ~ 3786.702)
@@ -242,71 +242,71 @@ wf_spec <- workflow(rec_spec, tree_spec)
 ## {.theme6 auto-animate="true"}
 
 :::: {.mono style="font-size: 15px;"}
-[species = dplyr::if_else(is.na(species), "unknown", species)]{.text-orange}  
+[species = dplyr::if_else(is.na(species), "unknown", species)]{.text-orange}
 
-[island = dplyr::if_else(is.na(island), "unknown", island)]{.text-grey}  
+[island = dplyr::if_else(is.na(island), "unknown", island)]{.text-grey}
 
-[sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.text-orange}  
+[sex = dplyr::if_else(is.na(sex), "unknown", sex)]{.text-orange}
 
-[bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.text-orange}  
+[bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)]{.text-orange}
 
-[bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.text-grey}  
+[bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)]{.text-grey}
 
-[flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.text-grey}  
+[flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)]{.text-grey}
 
-[species_Adelie = as.numeric(species == "Adelie")]{.text-grey}  
+[species_Adelie = as.numeric(species == "Adelie")]{.text-grey}
 
-[species_Chinstrap = as.numeric(species == "Chinstrap")]{.text-orange}  
+[species_Chinstrap = as.numeric(species == "Chinstrap")]{.text-orange}
 
-[species_Gentoo = as.numeric(species == "Gentoo")]{.text-grey}  
+[species_Gentoo = as.numeric(species == "Gentoo")]{.text-grey}
 
-[species_unknown = as.numeric(species == "unknown")]{.text-grey}  
+[species_unknown = as.numeric(species == "unknown")]{.text-grey}
 
-[island_Biscoe = as.numeric(island == "Biscoe")]{.text-grey}  
+[island_Biscoe = as.numeric(island == "Biscoe")]{.text-grey}
 
-[island_Dream = as.numeric(island == "Dream")]{.text-grey}  
+[island_Dream = as.numeric(island == "Dream")]{.text-grey}
 
-[island_Torgersen = as.numeric(island == "Torgersen")]{.text-grey}  
+[island_Torgersen = as.numeric(island == "Torgersen")]{.text-grey}
 
-[island_unknown = as.numeric(island == "unknown")]{.text-grey}  
+[island_unknown = as.numeric(island == "unknown")]{.text-grey}
 
-[sex_female = as.numeric(sex == "female")]{.text-grey}  
+[sex_female = as.numeric(sex == "female")]{.text-grey}
 
-[sex_male = as.numeric(sex == "male")]{.text-orange}  
+[sex_male = as.numeric(sex == "male")]{.text-orange}
 
-[sex_unknown = as.numeric(sex == "unknown")]{.text-grey}  
+[sex_unknown = as.numeric(sex == "unknown")]{.text-grey}
 
-[bill_length_mm = bill_length_mm / 5.451399]{.text-orange}  
+[bill_length_mm = bill_length_mm / 5.451399]{.text-orange}
 
-[bill_depth_mm = bill_depth_mm / 1.98353]{.text-grey}  
+[bill_depth_mm = bill_depth_mm / 1.98353]{.text-grey}
 
-[flipper_length_mm = flipper_length_mm / 14.04647]{.text-grey}  
+[flipper_length_mm = flipper_length_mm / 14.04647]{.text-grey}
 
-[species_Chinstrap = species_Chinstrap / 0.4001953]{.text-orange}  
+[species_Chinstrap = species_Chinstrap / 0.4001953]{.text-orange}
 
-[species_Gentoo = species_Gentoo / 0.4840438]{.text-grey}  
+[species_Gentoo = species_Gentoo / 0.4840438]{.text-grey}
 
-[island_Dream = island_Dream / 0.4795927]{.text-grey}  
+[island_Dream = island_Dream / 0.4795927]{.text-grey}
 
-[island_Torgersen = island_Torgersen / 0.3562296]{.text-grey}  
+[island_Torgersen = island_Torgersen / 0.3562296]{.text-grey}
 
-[sex_male = sex_male / 0.5002297]{.text-orange}  
+[sex_male = sex_male / 0.5002297]{.text-orange}
 
-[bill_length_mm = bill_length_mm - 8.04911]{.text-orange}  
+[bill_length_mm = bill_length_mm - 8.04911]{.text-orange}
 
-[bill_depth_mm = bill_depth_mm - 8.628085]{.text-grey}  
+[bill_depth_mm = bill_depth_mm - 8.628085]{.text-grey}
 
-[flipper_length_mm = flipper_length_mm - 14.32021]{.text-grey}  
+[flipper_length_mm = flipper_length_mm - 14.32021]{.text-grey}
 
-[species_Chinstrap = species_Chinstrap - 0.4978039]{.text-orange}  
+[species_Chinstrap = species_Chinstrap - 0.4978039]{.text-orange}
 
-[species_Gentoo = species_Gentoo - 0.7666532]{.text-grey}  
+[species_Gentoo = species_Gentoo - 0.7666532]{.text-grey}
 
-[island_Dream = island_Dream - 0.7411888]{.text-grey}  
+[island_Dream = island_Dream - 0.7411888]{.text-grey}
 
-[island_Torgersen = island_Torgersen - 0.4166906]{.text-grey}  
+[island_Torgersen = island_Torgersen - 0.4166906]{.text-grey}
 
-[sex_male = sex_male - 0.9448784]{.text-orange}  
+[sex_male = sex_male - 0.9448784]{.text-orange}
 
 .pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.2162576 ~ 3425.781, sex_male > -0.9448784 & bill_length_mm <= -0.2162576 ~ 4028.804, species_Chinstrap <= -0.4978039 & bill_length_mm > -0.2162576 ~ 5008.838, species_Chinstrap > -0.4978039 & bill_length_mm > -0.2162576 ~ 3786.702)
 :::
