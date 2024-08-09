@@ -79,3 +79,13 @@ $theme-grey: #d2d2d2;
 .shinylive-wrapper {
   height: 600px;
 }
+
+$n_themes: 12;
+
+.reveal {
+  @for $i from 1 through $n_themes {
+    .theme#{$i} {
+      background-color: hsl($i * 20, 50%, 50%);
+    }
+  }
+}

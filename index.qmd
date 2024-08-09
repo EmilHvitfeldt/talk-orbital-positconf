@@ -15,7 +15,7 @@ filters:
   - shinylive
 ---
 
-## {.center}
+## {.theme1 .center}
 
 :::: r-fit-text
 Tidypredict with recipes
@@ -25,7 +25,7 @@ turn workflow to SQL, spark,
 duckdb and beyond
 :::
 
-## {.center}
+## {.theme2 .center}
 
 :::: {.r-fit-text}
 You have your final model
@@ -39,7 +39,7 @@ What now?
 prediction
 :::
 
-##
+## {.theme2}
 
 ```{r}
 library(tidymodels)
@@ -70,13 +70,13 @@ wf_spec <- workflow(rec_spec, tree_spec)
 wf_fit <- fit(wf_spec, penguins_train)
 ```
 
-##
+## {.theme2}
 
 ```{r}
 predict(wf_fit, penguins_test)
 ```
 
-##
+## {.theme3}
 
 :::: {.columns}
 :::: {.column}
@@ -98,7 +98,7 @@ predict(wf_fit, penguins_test)
 :::
 :::
 
-##
+## {.theme3}
 
 {tidypredict} offers support for many types of models
 
@@ -111,7 +111,7 @@ predict(wf_fit, penguins_test)
 - Cubist models - `Cubist::cubist()` 
 - Tree models, via `partykit` - `partykit::ctree()` 
 
-## Why did talk?
+## Why did talk? {.theme5}
 
 tidypredict is limited to 1 equation which makes:
 
@@ -119,13 +119,13 @@ tidypredict is limited to 1 equation which makes:
 - for redundant calculations
 - classification probabilities awkward
 
-##
+## {.theme4}
 
 TODO: FANCY graphics
 
 orbital accouncement
 
-## How does it work?
+## How does it work? {.theme5}
 
 TODO: fancy graphic showing a blackbox model, then we peel it back to show a lot of math
 
@@ -140,7 +140,7 @@ Fitted party:
 |   |   [7] species_Chinstrap > -0.48558: 3783.152 (n = 46, err = 6315067.9)
 ```
 
-## How does it work?
+## How does it work? {.theme5}
 
 ```r
 if (bill_length_mm <= -0.2235864) {
@@ -158,7 +158,7 @@ if (bill_length_mm <= -0.2235864) {
 }
 ```
 
-## How does it work?
+## How does it work? {.theme5}
 
 ```r
 case_when(
@@ -169,7 +169,7 @@ case_when(
 )
 ```
 
-## How do workflows work?
+## How do workflows work? {.theme6}
 
 ```r
 rec_spec <- recipe(body_mass_g ~ ., data = penguins_train) |>
@@ -188,7 +188,7 @@ tree_spec <- decision_tree(tree_depth = 2) |>
 wf_spec <- workflow(rec_spec, tree_spec)
 ```
 
-## 
+##  {.theme6}
 
 :::: {.mono style="font-size: 15px;"}
 :::: {.fragment .tmp-hl-orange fragment-index=1}
@@ -239,7 +239,7 @@ wf_spec <- workflow(rec_spec, tree_spec)
 :::
 :::
 
-## {auto-animate="true"}
+## {.theme6 auto-animate="true"}
 
 :::: {.mono style="font-size: 15px;"}
 [species = dplyr::if_else(is.na(species), "unknown", species)]{.text-orange}  
@@ -311,7 +311,7 @@ wf_spec <- workflow(rec_spec, tree_spec)
 .pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.2162576 ~ 3425.781, sex_male > -0.9448784 & bill_length_mm <= -0.2162576 ~ 4028.804, species_Chinstrap <= -0.4978039 & bill_length_mm > -0.2162576 ~ 5008.838, species_Chinstrap > -0.4978039 & bill_length_mm > -0.2162576 ~ 3786.702)
 :::
 
-## {auto-animate="true"}
+## {.theme6 auto-animate="true"}
 
 :::: {.mono .margin style="font-size: 24px;"}
 species = dplyr::if_else(is.na(species), "unknown", species)  
@@ -339,7 +339,7 @@ sex_male = sex_male - 0.9448784
 .pred = case_when(sex_male <= -0.9448784 & bill_length_mm <= -0.2162576 ~ 3425.781, sex_male > -0.9448784 & bill_length_mm <= -0.2162576 ~ 4028.804, species_Chinstrap <= -0.4978039 & bill_length_mm > -0.2162576 ~ 5008.838, species_Chinstrap > -0.4978039 & bill_length_mm > -0.2162576 ~ 3786.702)
 :::
 
-## using orbital
+## using orbital {.theme7}
 
 use main function `orbital()` on fitted workflow
 
@@ -371,9 +371,7 @@ orbital_obj
 ```
 :::
 
-## 
-
-## 
+## {.theme8}
 
 :::: {.columns}
 :::: {.column}
@@ -388,7 +386,7 @@ orbital_obj
 :::
 :::
 
-## 
+## {.theme8}
 
 :::: {.columns}
 :::: {.column}
@@ -405,7 +403,7 @@ predict(orbital_obj, penguins_test)
 :::
 :::
 
-##
+## {.theme8}
 
 :::: {.columns}
 :::: {.column}
@@ -424,7 +422,7 @@ predict(orbital_obj, penguins_test)
 :::
 :::
 
-## predicting with tibble {auto-animate="true"}
+## predicting with tibble {.theme8 auto-animate="true"}
 
 
 :::: {.columns}
@@ -443,7 +441,7 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-## predicting with SQL {auto-animate="true"}
+## predicting with SQL {.theme8 auto-animate="true"}
 
 
 :::: {.columns}
@@ -467,13 +465,13 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-## predicting with spark {auto-animate="true"}
+## predicting with spark {.theme8 auto-animate="true"}
 
 
 :::: {.columns}
 :::: {.column}
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: true
 library(sparklyr)
 
@@ -484,14 +482,14 @@ new_penguins <- copy_to(con, penguins_test)
 :::: {.column}
 
 ```{r}
-#| eval: true
+#| eval: false
 predict(orbital_obj, new_penguins)
 ```
 
 :::
 :::
 
-## predicting with duckdb {auto-animate="true"}
+## predicting with duckdb {.theme8 auto-animate="true"}
 
 
 :::: {.columns}
@@ -513,7 +511,7 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-## predicting with arrow {auto-animate="true"}
+## predicting with arrow {.theme8 auto-animate="true"}
 
 
 :::: {.columns}
@@ -534,7 +532,7 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-## 
+## {.theme9}
 
 :::: {.columns}
 :::: {.column}
@@ -549,7 +547,7 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-## 
+## {.theme9}
 
 :::: {.columns}
 :::: {.column}
@@ -562,14 +560,13 @@ predict(orbital_obj, new_penguins)
 :::
 :::
 
-
-## Exporting SQL
+## Exporting SQL {.theme9}
 
 ```{r}
 orbital_sql(orbital_obj, con)
 ```
 
-## Shiny code
+## Shiny code {.theme10}
 
 Generate function
 
@@ -584,7 +581,7 @@ orbital_r_fun(orbital_obj, file = "shiny-fun.R")
 readLines("shiny-fun.R") |> cat(sep = "\n")
 ```
 
-## Shiny code
+## Shiny code {.theme10}
 
 UI
 
@@ -601,7 +598,7 @@ selectInput("sex", "sex:", c("male", "female", NA), "male")
 textOutput("weight")
 ```
 
-## Shiny code
+## Shiny code {.theme10}
 
 Server
 
@@ -621,7 +618,7 @@ output$weight <- renderText({
 })
 ```
 
-##
+## {.theme10}
 
 ```{shinylive-r}
 #| standalone: true
@@ -678,7 +675,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-## Pure Javascript prediction
+## Pure Javascript prediction {.theme11}
 
 <iframe
   width="100%"
@@ -686,7 +683,7 @@ shinyApp(ui = ui, server = server)
   src="js-example.html">
 </iframe>
 
-## Why use this package?
+## Why use this package? {.theme12}
 
 - Cons
     - not all models and recipes are supported
@@ -700,3 +697,7 @@ shinyApp(ui = ui, server = server)
 :::: footer
 <https://orbital.tidymodels.org/articles/pros-cons.html>
 :::
+
+## Why use this package? {.theme13}
+
+TODO: add QR code and links
