@@ -80,12 +80,12 @@ $theme-grey: #d2d2d2;
   height: 600px;
 }
 
-$n_themes: 12;
+$n_themes: 13;
 
 .reveal {
   @for $i from 1 through $n_themes {
     .theme#{$i} {
-      background-color: hsl($i * 20, 50%, 50%);
+      background-color: hsl($i * 25, 50%, 50%);
     }
   }
 }
