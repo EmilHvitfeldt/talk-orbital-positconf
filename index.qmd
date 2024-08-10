@@ -111,7 +111,7 @@ predict(wf_fit, penguins_test)
 - Cubist models - `Cubist::cubist()` 
 - Tree models, via `partykit` - `partykit::ctree()` 
 
-## Why did talk? {.theme5}
+## Why did talk? {.theme4}
 
 tidypredict is limited to 1 equation which makes:
 
@@ -698,6 +698,6 @@ shinyApp(ui = ui, server = server)
 <https://orbital.tidymodels.org/articles/pros-cons.html>
 :::
 
-## Why use this package? {.theme13}
+## Thank you! {.theme13}
 
 TODO: add QR code and links
