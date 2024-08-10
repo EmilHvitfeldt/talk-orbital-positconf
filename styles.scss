@@ -1,9 +1,34 @@
+$colors: (
+  "lightyellow": #FAF6CC,
+  "yellow": #F6DD8B,
+  "pink": #E21285,
+  "blue": #92E1F4,
+  "orange": #c78c1d,
+  "grey": #d2d2d2,
+);
+
+/*-- scss:functions --*/
+
+@function theme-color($color) {
+  @return map-get($colors, $color);
+}
+
 /*-- scss:defaults --*/
 
-$theme-orange: #c78c1d;
-$theme-grey: #d2d2d2;
+$body-color: theme-color("lightyellow");
+$link-color: theme-color("pink");
 
 /*-- scss:rules --*/
+
+@each $name, $color in $colors {
+  .text-#{$name} {
+    color: $color;
+  }
+
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
 
 .mono {
   font-family: monospace;
@@ -18,74 +43,60 @@ $theme-grey: #d2d2d2;
   }
 }
 
-.reveal .slides section .fragment.tmp-hl-orange {
-  opacity: 1;
-  visibility: inherit;
-}
+.reveal .slides section .fragment {
+  &.tmp-hl-orange {
+    opacity: 1;
+    visibility: inherit;
 
-.reveal .slides section .fragment.tmp-hl-orange.visible {
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.tmp-hl-orange.current-fragment {
-  color: $theme-orange;
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-orange {
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-orange.visible {
-  color: $theme-orange;
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-orange.current-fragment {
-  color: $theme-orange;
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-grey {
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-grey.visible {
-  color: $theme-grey;
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal .slides section .fragment.hl-grey.current-fragment {
-  color: $theme-grey;
-  opacity: 1;
-  visibility: inherit;
-}
-
-.text-grey {
-  color: $theme-grey;
-}
-
-.text-orange {
-  color: $theme-orange;
-}
-
-.shinylive-wrapper {
-  height: 600px;
-}
-
-$n_themes: 13;
-
-.reveal {
-  @for $i from 1 through $n_themes {
-    .theme#{$i} {
-      background-color: hsl($i * 25, 50%, 50%);
+    &.current-fragment {
+      color: theme-color("orange");
     }
   }
+
+  &.hl-orange {
+    opacity: 1;
+    visibility: inherit;
+
+    &.visible,
+    &.current-fragment {
+      color: theme-color("orange");
+
+    }
+  }
+
+  &.hl-grey {
+    opacity: 1;
+    visibility: inherit;
+
+    &.visible,
+    &.current-fragment {
+      color: theme-color("grey");
+    }
+  }
+
+}
+
+// Background images
+@mixin background-full {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@mixin theme-slide($number) {
+  .theme#{$number} {
+    &:is(.slide-background) {
+      background-image: url('../../../../../assets/SVG/theme#{$number}.svg');
+      @include background-full;
+    }
+  }
+}
+
+@for $i from 1 through 13 {
+  @include theme-slide($i);
+}
+
+// Shinylive
+.shinylive-wrapper {
+  height: 600px;
 }
