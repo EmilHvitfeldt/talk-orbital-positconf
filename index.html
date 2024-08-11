@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/tabby.min.js"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -397,10 +396,14 @@
 
 <section id="section" class="slide level2 theme1 center">
 <h2></h2>
-<div class="r-fit-text">
+<div class="r-fit-text title">
 <p>Tidypredict with recipes</p>
-<p>turn workflow to SQL, spark,</p>
-<p>duckdb and beyond</p>
+</div>
+<div class="r-fit-text title">
+<p>turning workflow</p>
+</div>
+<div class="r-fit-text title">
+<p>to SQL, spark, duckdb and beyond</p>
 </div>
 </section>
 <section id="section-1" class="slide level2 theme2 center">
@@ -412,13 +415,13 @@
 </div>
 </div>
 <div class="fragment">
-<p>prediction</p>
+<p><span class="text-pink dodger" style="font-size: 100px;">prediction</span></p>
 </div>
 </section>
 <section id="section-2" class="slide level2 theme2">
 <h2></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bonsai)</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
@@ -443,13 +446,16 @@
 <span id="cb1-23"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"partykit"</span>)</span>
 <span id="cb1-24"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="" aria-hidden="true" tabindex="-1"></a>wf_spec <span class="ot">&lt;-</span> <span class="fu">workflow</span>(rec_spec, tree_spec)</span>
-<span id="cb1-26"><a href="" aria-hidden="true" tabindex="-1"></a>wf_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(wf_spec, penguins_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a href="" aria-hidden="true" tabindex="-1"></a>wf_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(wf_spec, penguins_train)</span></code></pre></div>
 </div>
 </section>
 <section id="section-3" class="slide level2 theme2">
 <h2></h2>
+<div style="height: 125px">
+
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(wf_fit, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(wf_fit, penguins_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 86 × 1
    .pred
@@ -490,7 +496,9 @@
 </section>
 <section id="section-5" class="slide level2 theme3">
 <h2></h2>
+<div style="text-align: center;">
 <p>{tidypredict} offers support for many types of models</p>
+</div>
 <ul>
 <li>Linear Regression - <code>lm()</code></li>
 <li>Generalized Linear model - <code>glm()</code></li>
@@ -502,35 +510,58 @@
 <li>Tree models, via <code>partykit</code> - <code>partykit::ctree()</code></li>
 </ul>
 </section>
-<section id="why-did-talk" class="slide level2 theme4">
-<h2>Why did talk?</h2>
-<p>tidypredict is limited to 1 equation which makes:</p>
+<section id="why-this-talk" class="slide level2 theme4">
+<h2>Why this talk?</h2>
+<div class="columns">
+<div class="column">
+<div style="height: 200px">
+
+</div>
+<p>{tidypredict} is limited to 1 equation which makes:</p>
+</div><div class="column">
+<div style="height: 150px">
+
+</div>
+<div class="highlight-last">
 <ul>
-<li>recipes support very hard</li>
-<li>for redundant calculations</li>
-<li>classification probabilities awkward</li>
+<li class="fragment">recipes support very hard</li>
+<li class="fragment">for redundant calculations</li>
+<li class="fragment">classification probabilities awkward</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="section-6" class="slide level2 theme4">
-<h2></h2>
-<p>TODO: FANCY graphics</p>
-<p>orbital accouncement</p>
+<section id="section-6" class="slide level2 theme4" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p><img data-src="assets/hex.svg" class="absolute" style="opacity: 0;top: 50%; right: 50%; width: 12.16px; height: 6.83px; "> <img data-src="assets/letters.svg" class="absolute" style="top: -1000px; right: -1000px; "> <img data-src="assets/satelite.svg" class="absolute" style="top: 500px; right: 2000px; "></p>
+</section>
+<section id="section-7" class="slide level2 theme4" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p><img data-src="assets/hex.svg" class="absolute" style="top: 0px; right: 0px; width: 1216px; height: 683px; "> <img data-src="assets/letters.svg" class="absolute" style="top: -100px; right: -80px; "> <img data-src="assets/satelite.svg" class="absolute" style="top: 100px; right: 100px; "></p>
 </section>
 <section id="how-does-it-work" class="slide level2 theme5">
 <h2>How does it work?</h2>
-<p>TODO: fancy graphic showing a blackbox model, then we peel it back to show a lot of math</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="an">Fitted party:</span></span>
+<div style="height: 150px">
+
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="an">Fitted party:</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span> root</span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>|   <span class="co">[</span><span class="ot">2</span><span class="co">]</span> bill_length_mm &lt;= -0.22359</span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">[</span><span class="ot">3</span><span class="co">]</span> sex_male &lt;= -0.92289: 3414.552 (n = 67, err = 8536436.6)</span>
 <span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">[</span><span class="ot">4</span><span class="co">]</span> sex_male &gt; -0.92289: 3989.205 (n = 44, err = 5141747.2)</span>
 <span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>|   <span class="co">[</span><span class="ot">5</span><span class="co">]</span> bill_length_mm &gt; -0.22359</span>
 <span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">[</span><span class="ot">6</span><span class="co">]</span> species_Chinstrap &lt;= -0.48558: 4968.182 (n = 99, err = 26352272.7)</span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">[</span><span class="ot">7</span><span class="co">]</span> species_Chinstrap &gt; -0.48558: 3783.152 (n = 46, err = 6315067.9)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">[</span><span class="ot">7</span><span class="co">]</span> species_Chinstrap &gt; -0.48558: 3783.152 (n = 46, err = 6315067.9)</span></code></pre></div>
+</div>
 </section>
 <section id="how-does-it-work-1" class="slide level2 theme5">
 <h2>How does it work?</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (bill_length_mm <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.2235864</span>) {</span>
+<div style="height: 125px">
+
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (bill_length_mm <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.2235864</span>) {</span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(sex_male <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.92289</span>) {</span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fl">3414.552</span>)</span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
@@ -542,20 +573,27 @@
 <span id="cb5-10"><a href="" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb5-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fl">3783.152</span>)</span>
 <span id="cb5-12"><a href="" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-13"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-13"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="how-does-it-work-2" class="slide level2 theme5">
 <h2>How does it work?</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
+<div style="height: 175px">
+
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  sex_male <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.9228935</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.2235864</span> <span class="sc">~</span> <span class="fl">3414.552</span>, </span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  sex_male <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.9228935</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.2235864</span> <span class="sc">~</span> <span class="fl">3989.205</span>,</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  species_Chinstrap <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.4855824</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.2235864</span> <span class="sc">~</span> <span class="fl">4968.182</span>,</span>
 <span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>  species_Chinstrap <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.4855824</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.2235864</span> <span class="sc">~</span> <span class="fl">3783.152</span></span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </section>
 <section id="how-do-workflows-work" class="slide level2 theme6">
 <h2>How do workflows work?</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>rec_spec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data =</span> penguins_train) <span class="sc">|&gt;</span></span>
+<div style="height: 100px">
+
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>rec_spec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data =</span> penguins_train) <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_unknown</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_impute_median</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
@@ -568,24 +606,25 @@
 <span id="cb7-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"partykit"</span>)</span>
 <span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="" aria-hidden="true" tabindex="-1"></a>wf_spec <span class="ot">&lt;-</span> <span class="fu">workflow</span>(rec_spec, tree_spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-14"><a href="" aria-hidden="true" tabindex="-1"></a>wf_spec <span class="ot">&lt;-</span> <span class="fu">workflow</span>(rec_spec, tree_spec)</span></code></pre></div>
+</div>
 </section>
-<section id="section-7" class="slide level2 theme6">
+<section id="section-8" class="slide level2 theme6">
 <h2></h2>
 <div class="mono" style="font-size: 15px;">
-<div class="fragment tmp-hl-orange" data-fragment-index="1">
-<div class="line-block"><span class="fragment hl-orange" data-fragment-index="13">species = dplyr::if_else(is.na(species), “unknown”, species)</span><br>
+<div class="fragment tmp-hl-pink" data-fragment-index="1">
+<div class="line-block"><span class="fragment hl-pink" data-fragment-index="13">species = dplyr::if_else(is.na(species), “unknown”, species)</span><br>
 <span class="fragment hl-grey" data-fragment-index="13">island = dplyr::if_else(is.na(island), “unknown”, island)</span><br>
-<span class="fragment hl-orange" data-fragment-index="13">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></div>
+<span class="fragment hl-pink" data-fragment-index="13">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></div>
 </div>
-<div class="fragment tmp-hl-orange" data-fragment-index="2">
-<div class="line-block"><span class="fragment hl-orange" data-fragment-index="12">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span><br>
+<div class="fragment tmp-hl-pink" data-fragment-index="2">
+<div class="line-block"><span class="fragment hl-pink" data-fragment-index="12">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span><br>
 <span class="fragment hl-grey" data-fragment-index="12">bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)</span><br>
 <span class="fragment hl-grey" data-fragment-index="12">flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)</span></div>
 </div>
-<div class="fragment tmp-hl-orange" data-fragment-index="3">
+<div class="fragment tmp-hl-pink" data-fragment-index="3">
 <div class="line-block"><span class="fragment hl-grey" data-fragment-index="11">species_Adelie = as.numeric(species == “Adelie”)</span><br>
-<span class="fragment hl-orange" data-fragment-index="11">species_Chinstrap = as.numeric(species == “Chinstrap”)</span><br>
+<span class="fragment hl-pink" data-fragment-index="11">species_Chinstrap = as.numeric(species == “Chinstrap”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">species_Gentoo = as.numeric(species == “Gentoo”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">species_unknown = as.numeric(species == “unknown”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">island_Biscoe = as.numeric(island == “Biscoe”)</span><br>
@@ -593,45 +632,60 @@
 <span class="fragment hl-grey" data-fragment-index="11">island_Torgersen = as.numeric(island == “Torgersen”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">island_unknown = as.numeric(island == “unknown”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">sex_female = as.numeric(sex == “female”)</span><br>
-<span class="fragment hl-orange" data-fragment-index="11">sex_male = as.numeric(sex == “male”)</span><br>
+<span class="fragment hl-pink" data-fragment-index="11">sex_male = as.numeric(sex == “male”)</span><br>
 <span class="fragment hl-grey" data-fragment-index="11">sex_unknown = as.numeric(sex == “unknown”)</span></div>
 </div>
-<div class="fragment tmp-hl-orange" data-fragment-index="4">
-<div class="line-block"><span class="fragment hl-orange" data-fragment-index="10">bill_length_mm = bill_length_mm / 5.451399</span><br>
+<div class="fragment tmp-hl-pink" data-fragment-index="4">
+<div class="line-block"><span class="fragment hl-pink" data-fragment-index="10">bill_length_mm = bill_length_mm / 5.451399</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">bill_depth_mm = bill_depth_mm / 1.98353</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">flipper_length_mm = flipper_length_mm / 14.04647</span><br>
-<span class="fragment hl-orange" data-fragment-index="10">species_Chinstrap = species_Chinstrap / 0.4001953</span><br>
+<span class="fragment hl-pink" data-fragment-index="10">species_Chinstrap = species_Chinstrap / 0.4001953</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">species_Gentoo = species_Gentoo / 0.484043</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">island_Dream = island_Dream / 0.4795927</span><br>
 <span class="fragment hl-grey" data-fragment-index="10">island_Torgersen = island_Torgersen / 0.3562296</span><br>
-<span class="fragment hl-orange" data-fragment-index="10">sex_male = sex_male / 0.5002297</span></div>
+<span class="fragment hl-pink" data-fragment-index="10">sex_male = sex_male / 0.5002297</span></div>
 </div>
-<div class="fragment tmp-hl-orange" data-fragment-index="5">
-<div class="line-block"><span class="fragment hl-orange" data-fragment-index="8">bill_length_mm = bill_length_mm - 8.04911</span><br>
+<div class="fragment tmp-hl-pink" data-fragment-index="5">
+<div class="line-block"><span class="fragment hl-pink" data-fragment-index="8">bill_length_mm = bill_length_mm - 8.04911</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">bill_depth_mm = bill_depth_mm - 8.628085</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">flipper_length_mm = flipper_length_mm - 14.32021</span><br>
-<span class="fragment hl-orange" data-fragment-index="8">species_Chinstrap = species_Chinstrap - 0.4978039</span><br>
+<span class="fragment hl-pink" data-fragment-index="8">species_Chinstrap = species_Chinstrap - 0.4978039</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">species_Gentoo = species_Gentoo - 0.7666532</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">island_Dream = island_Dream - 0.7411888</span><br>
 <span class="fragment hl-grey" data-fragment-index="9">island_Torgersen = island_Torgersen - 0.4166906</span><br>
-<span class="fragment hl-orange" data-fragment-index="8">sex_male = sex_male - 0.9448784</span></div>
+<span class="fragment hl-pink" data-fragment-index="8">sex_male = sex_male - 0.9448784</span></div>
 </div>
-<div class="fragment tmp-hl-orange" data-fragment-index="6">
-<p>.pred = case_when(<span class="fragment hl-orange" data-fragment-index="7">sex_male</span> &lt;= -0.9448784 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 3425.781, <span class="fragment hl-orange" data-fragment-index="7">sex_male</span> &gt; -0.9448784 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 4028.804, <span class="fragment hl-orange" data-fragment-index="7">species_Chinstrap</span> &lt;= -0.4978039 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 5008.838, <span class="fragment hl-orange" data-fragment-index="7">species_Chinstrap</span> &gt; -0.4978039 &amp; <span class="fragment hl-orange" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 3786.702)</p>
+<div class="fragment tmp-hl-pink" data-fragment-index="6">
+<p>.pred = case_when(<span class="fragment hl-pink" data-fragment-index="7">sex_male</span> &lt;= -0.9448784 &amp; <span class="fragment hl-pink" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 3425.781, <span class="fragment hl-pink" data-fragment-index="7">sex_male</span> &gt; -0.9448784 &amp; <span class="fragment hl-pink" data-fragment-index="7">bill_length_mm</span> &lt;= -0.2162576 ~ 4028.804, <span class="fragment hl-pink" data-fragment-index="7">species_Chinstrap</span> &lt;= -0.4978039 &amp; <span class="fragment hl-pink" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 5008.838, <span class="fragment hl-pink" data-fragment-index="7">species_Chinstrap</span> &gt; -0.4978039 &amp; <span class="fragment hl-pink" data-fragment-index="7">bill_length_mm</span> &gt; -0.2162576 ~ 3786.702)</p>
 </div>
+</div>
+<div class="fragment fade-in-then-out absolute" data-fragment-index="1" style="top: 0%; right: 0%; ">
+<p><code>step_unknown()</code></p>
+</div>
+<div class="fragment fade-in-then-out absolute" data-fragment-index="2" style="top: 10%; right: 0%; ">
+<p><code>step_impute_median()</code></p>
+</div>
+<div class="fragment fade-in-then-out absolute" data-fragment-index="3" style="top: 30%; right: 0%; ">
+<p><code>step_dummy()</code></p>
+</div>
+<div class="fragment fade-in-then-out absolute" data-fragment-index="4" style="top: 55%; right: 0%; ">
+<p><code>step_scale()</code></p>
+</div>
+<div class="fragment fade-in-then-out absolute" data-fragment-index="5" style="top: 75%; right: 0%; ">
+<p><code>step_center()</code></p>
 </div>
 </section>
-<section id="section-8" class="slide level2 theme6" data-auto-animate="true">
+<section id="section-9" class="slide level2 theme6" data-auto-animate="true">
 <h2 data-id="quarto-animate-title"></h2>
 <div class="mono" style="font-size: 15px;">
-<p><span class="text-orange">species = dplyr::if_else(is.na(species), “unknown”, species)</span></p>
+<p><span class="text-lightpink">species = dplyr::if_else(is.na(species), “unknown”, species)</span></p>
 <p><span class="text-grey">island = dplyr::if_else(is.na(island), “unknown”, island)</span></p>
-<p><span class="text-orange">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></p>
-<p><span class="text-orange">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span></p>
+<p><span class="text-lightpink">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></p>
+<p><span class="text-lightpink">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span></p>
 <p><span class="text-grey">bill_depth_mm = dplyr::if_else(is.na(bill_depth_mm), 17.3, bill_depth_mm)</span></p>
 <p><span class="text-grey">flipper_length_mm = dplyr::if_else(is.na(flipper_length_mm), 198, flipper_length_mm)</span></p>
 <p><span class="text-grey">species_Adelie = as.numeric(species == “Adelie”)</span></p>
-<p><span class="text-orange">species_Chinstrap = as.numeric(species == “Chinstrap”)</span></p>
+<p><span class="text-lightpink">species_Chinstrap = as.numeric(species == “Chinstrap”)</span></p>
 <p><span class="text-grey">species_Gentoo = as.numeric(species == “Gentoo”)</span></p>
 <p><span class="text-grey">species_unknown = as.numeric(species == “unknown”)</span></p>
 <p><span class="text-grey">island_Biscoe = as.numeric(island == “Biscoe”)</span></p>
@@ -639,55 +693,55 @@
 <p><span class="text-grey">island_Torgersen = as.numeric(island == “Torgersen”)</span></p>
 <p><span class="text-grey">island_unknown = as.numeric(island == “unknown”)</span></p>
 <p><span class="text-grey">sex_female = as.numeric(sex == “female”)</span></p>
-<p><span class="text-orange">sex_male = as.numeric(sex == “male”)</span></p>
+<p><span class="text-lightpink">sex_male = as.numeric(sex == “male”)</span></p>
 <p><span class="text-grey">sex_unknown = as.numeric(sex == “unknown”)</span></p>
-<p><span class="text-orange">bill_length_mm = bill_length_mm / 5.451399</span></p>
+<p><span class="text-lightpink">bill_length_mm = bill_length_mm / 5.451399</span></p>
 <p><span class="text-grey">bill_depth_mm = bill_depth_mm / 1.98353</span></p>
 <p><span class="text-grey">flipper_length_mm = flipper_length_mm / 14.04647</span></p>
-<p><span class="text-orange">species_Chinstrap = species_Chinstrap / 0.4001953</span></p>
+<p><span class="text-lightpink">species_Chinstrap = species_Chinstrap / 0.4001953</span></p>
 <p><span class="text-grey">species_Gentoo = species_Gentoo / 0.4840438</span></p>
 <p><span class="text-grey">island_Dream = island_Dream / 0.4795927</span></p>
 <p><span class="text-grey">island_Torgersen = island_Torgersen / 0.3562296</span></p>
-<p><span class="text-orange">sex_male = sex_male / 0.5002297</span></p>
-<p><span class="text-orange">bill_length_mm = bill_length_mm - 8.04911</span></p>
+<p><span class="text-lightpink">sex_male = sex_male / 0.5002297</span></p>
+<p><span class="text-lightpink">bill_length_mm = bill_length_mm - 8.04911</span></p>
 <p><span class="text-grey">bill_depth_mm = bill_depth_mm - 8.628085</span></p>
 <p><span class="text-grey">flipper_length_mm = flipper_length_mm - 14.32021</span></p>
-<p><span class="text-orange">species_Chinstrap = species_Chinstrap - 0.4978039</span></p>
+<p><span class="text-lightpink">species_Chinstrap = species_Chinstrap - 0.4978039</span></p>
 <p><span class="text-grey">species_Gentoo = species_Gentoo - 0.7666532</span></p>
 <p><span class="text-grey">island_Dream = island_Dream - 0.7411888</span></p>
 <p><span class="text-grey">island_Torgersen = island_Torgersen - 0.4166906</span></p>
-<p><span class="text-orange">sex_male = sex_male - 0.9448784</span></p>
-<p>.pred = case_when(sex_male &lt;= -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 3425.781, sex_male &gt; -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 4028.804, species_Chinstrap &lt;= -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 5008.838, species_Chinstrap &gt; -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 3786.702)</p>
+<p><span class="text-lightpink">sex_male = sex_male - 0.9448784</span></p>
+<p><span class="text-lightpink">.pred = case_when(sex_male &lt;= -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 3425.781, sex_male &gt; -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 4028.804, species_Chinstrap &lt;= -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 5008.838, species_Chinstrap &gt; -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 3786.702)</span></p>
 </div>
 </section>
-<section id="section-9" class="slide level2 theme6" data-auto-animate="true">
+<section id="section-10" class="slide level2 theme6" data-auto-animate="true">
 <h2 data-id="quarto-animate-title"></h2>
 <div class="mono margin" style="font-size: 24px;">
-<p>species = dplyr::if_else(is.na(species), “unknown”, species)</p>
-<p>sex = dplyr::if_else(is.na(sex), “unknown”, sex)</p>
-<p>bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</p>
-<p>species_Chinstrap = as.numeric(species == “Chinstrap”)</p>
-<p>sex_male = as.numeric(sex == “male”)</p>
-<p>bill_length_mm = bill_length_mm / 5.451399</p>
-<p>species_Chinstrap = species_Chinstrap / 0.4001953</p>
-<p>sex_male = sex_male / 0.5002297</p>
-<p>bill_length_mm = bill_length_mm - 8.04911</p>
-<p>species_Chinstrap = species_Chinstrap - 0.4978039</p>
-<p>sex_male = sex_male - 0.9448784</p>
-<p>.pred = case_when(sex_male &lt;= -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 3425.781, sex_male &gt; -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 4028.804, species_Chinstrap &lt;= -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 5008.838, species_Chinstrap &gt; -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 3786.702)</p>
+<p><span class="text-lightpink">species = dplyr::if_else(is.na(species), “unknown”, species)</span></p>
+<p><span class="text-lightpink">sex = dplyr::if_else(is.na(sex), “unknown”, sex)</span></p>
+<p><span class="text-lightpink">bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.95, bill_length_mm)</span></p>
+<p><span class="text-lightpink">species_Chinstrap = as.numeric(species == “Chinstrap”)</span></p>
+<p><span class="text-lightpink">sex_male = as.numeric(sex == “male”)</span></p>
+<p><span class="text-lightpink">bill_length_mm = bill_length_mm / 5.451399</span></p>
+<p><span class="text-lightpink">species_Chinstrap = species_Chinstrap / 0.4001953</span></p>
+<p><span class="text-lightpink">sex_male = sex_male / 0.5002297</span></p>
+<p><span class="text-lightpink">bill_length_mm = bill_length_mm - 8.04911</span></p>
+<p><span class="text-lightpink">species_Chinstrap = species_Chinstrap - 0.4978039</span></p>
+<p><span class="text-lightpink">sex_male = sex_male - 0.9448784</span></p>
+<p><span class="text-lightpink">.pred = case_when(sex_male &lt;= -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 3425.781, sex_male &gt; -0.9448784 &amp; bill_length_mm &lt;= -0.2162576 ~ 4028.804, species_Chinstrap &lt;= -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 5008.838, species_Chinstrap &gt; -0.4978039 &amp; bill_length_mm &gt; -0.2162576 ~ 3786.702)</span></p>
 </div>
 </section>
 <section id="using-orbital" class="slide level2 theme7">
 <h2>using orbital</h2>
 <p>use main function <code>orbital()</code> on fitted workflow</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(orbital)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(orbital)</span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>orbital_obj <span class="ot">&lt;-</span> <span class="fu">orbital</span>(wf_fit)</span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>orbital_obj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>orbital_obj</span></code></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>── orbital Object ────────────────────────────────────────────────────────────────────────────────</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>── orbital Object ────────────────────────────────────────────────────────────────────────────────</span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>• species = dplyr::if_else(is.na(species), "unknown", species)</span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>• sex = dplyr::if_else(is.na(sex), "unknown", sex)</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>• bill_length_mm = dplyr::if_else(is.na(bill_length_mm), 44.5, bill_length_mm)</span>
@@ -701,44 +755,22 @@
 <span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>• sex_male = sex_male - 0.9448784</span>
 <span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a>• .pred = case_when(sex_male &lt;= -0.9448784 &amp; bill_length_mm &lt;= -0.1268424 ~ 3467.958, sex_m ...</span>
 <span id="cb9-14"><a href="" aria-hidden="true" tabindex="-1"></a>──────────────────────────────────────────────────────────────────────────────────────────────────</span>
-<span id="cb9-15"><a href="" aria-hidden="true" tabindex="-1"></a>12 equations in total.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section-10" class="slide level2 theme8">
-<h2></h2>
-<div class="columns">
-<div class="column">
-<h3 id="prediction">Prediction</h3>
-</div><div class="column">
-<h3 id="code-generation">Code Generation</h3>
-</div>
+<span id="cb9-15"><a href="" aria-hidden="true" tabindex="-1"></a>12 equations in total.</span></code></pre></div>
 </div>
 </section>
 <section id="section-11" class="slide level2 theme8">
 <h2></h2>
 <div class="columns">
 <div class="column">
-<h3 id="prediction-1">Prediction</h3>
+<div style="height: 300px">
+
+</div>
+<h3 id="prediction">Prediction</h3>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 86 × 1
-   .pred
-   &lt;dbl&gt;
- 1 3985.
- 2 3394.
- 3 3394.
- 4 3394.
- 5 3394.
- 6 3985.
- 7 3394.
- 8 3394.
- 9 3394.
-10 3985.
-# ℹ 76 more rows</code></pre>
+<div style="height: 300px">
+
 </div>
-</div>
+<h3 id="code-generation">Code Generation</h3>
 </div>
 </div>
 </section>
@@ -746,8 +778,47 @@
 <h2></h2>
 <div class="columns">
 <div class="column">
+<div style="height: 300px">
+
+</div>
+<h3 id="prediction-1">Prediction</h3>
+</div><div class="column">
+<div style="height: 100px">
+
+</div>
+<div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(wf_fit, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, penguins_test)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 86 × 1
+   .pred
+   &lt;dbl&gt;
+ 1 3985.
+ 2 3394.
+ 3 3394.
+ 4 3394.
+ 5 3394.
+ 6 3985.
+ 7 3394.
+ 8 3394.
+ 9 3394.
+10 3985.
+# ℹ 76 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-13" class="slide level2 theme8">
+<h2></h2>
+<div class="columns">
+<div class="column">
+<div style="height: 100px">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(wf_fit, penguins_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 86 × 1
    .pred
@@ -766,8 +837,11 @@
 </div>
 </div>
 </div><div class="column">
+<div style="height: 100px">
+
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, penguins_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 86 × 1
    .pred
@@ -790,14 +864,12 @@
 </section>
 <section id="predicting-with-tibble" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with tibble</h2>
-<div class="columns">
+<div class="cell columns column-output-location">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> penguins_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb16-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> penguins_test</span>
+<span id="cb16-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 86 × 1
    .pred
@@ -816,23 +888,20 @@
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="predicting-with-sql" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with SQL</h2>
-<div class="columns">
+<div class="cell columns column-output-location">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">path =</span> <span class="st">":memory:"</span>)</span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb18-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb18-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb18-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb18-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">path =</span> <span class="st">":memory:"</span>)</span>
+<span id="cb18-6" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span>
+<span id="cb18-7" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Source:   SQL [?? x 1]
 # Database: sqlite 3.46.0 []
@@ -852,38 +921,49 @@
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="predicting-with-spark" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with spark</h2>
-<div class="columns">
+<div class="cell columns column-output-location">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(<span class="at">master =</span> <span class="st">"local"</span>)</span>
-<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb20-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
+<span id="cb20-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(<span class="at">master =</span> <span class="st">"local"</span>)</span>
+<span id="cb20-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span>
+<span id="cb20-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [?? x 1]
+# Database: spark_connection
+   .pred
+   &lt;dbl&gt;
+ 1 3985.
+ 2 3394.
+ 3 3394.
+ 4 3394.
+ 5 3394.
+ 6 3985.
+ 7 3394.
+ 8 3394.
+ 9 3394.
+10 3985.
+# ℹ more rows</code></pre>
 </div>
 </div>
 </div>
 </section>
 <section id="predicting-with-duckdb" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with duckdb</h2>
-<div class="columns">
+<div class="cell columns column-output-location">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">duckdb</span>(<span class="at">dbdir =</span> <span class="st">":memory:"</span>))</span>
-<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb22-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
+<span id="cb22-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">duckdb</span>(<span class="at">dbdir =</span> <span class="st">":memory:"</span>))</span>
+<span id="cb22-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span>
+<span id="cb22-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Source:   SQL [?? x 1]
 # Database: DuckDB v1.0.0 [root@Darwin 23.5.0:R 4.4.0/:memory:]
@@ -903,20 +983,17 @@
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="predicting-with-arrow" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with arrow</h2>
-<div class="columns">
+<div class="cell columns column-output-location">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
-<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">as_arrow_table</span>(penguins_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
+<span id="cb24-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">as_arrow_table</span>(penguins_test)</span>
+<span id="cb24-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Table (query)
 .pred: double (case_when({1=((subtract_checked(divide(cast(cast((if_else(is_null(sex, {nan_is_null=true}), [
@@ -941,24 +1018,32 @@ See $.data for the source Arrow object</code></pre>
 </div>
 </div>
 </div>
-</div>
-</section>
-<section id="section-13" class="slide level2 theme9">
-<h2></h2>
-<div class="columns">
-<div class="column">
-<h3 id="prediction-2">Prediction</h3>
-</div><div class="column">
-<h3 id="code-generation-1">Code Generation</h3>
-</div>
-</div>
 </section>
 <section id="section-14" class="slide level2 theme9">
 <h2></h2>
 <div class="columns">
 <div class="column">
+<div style="height: 300px">
+
+</div>
+<h3 id="prediction-2">Prediction</h3>
+</div><div class="column">
+<div style="height: 300px">
+
+</div>
+<h3 id="code-generation-1">Code Generation</h3>
+</div>
+</div>
+</section>
+<section id="section-15" class="slide level2 theme9">
+<h2></h2>
+<div class="columns">
+<div class="column">
 
 </div><div class="column">
+<div style="height: 300px">
+
+</div>
 <h3 id="code-generation-2">Code Generation</h3>
 </div>
 </div>
@@ -966,35 +1051,43 @@ See $.data for the source Arrow object</code></pre>
 <section id="exporting-sql" class="slide level2 theme9">
 <h2>Exporting SQL</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">orbital_sql</span>(orbital_obj, con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">path =</span> <span class="st">":memory:"</span>)</span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">orbital_sql</span>(orbital_obj, con)</span></code></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;SQL&gt; CASE WHEN ((species IS NULL)) THEN 'unknown' WHEN NOT ((species IS NULL)) THEN species END AS species
-&lt;SQL&gt; CASE WHEN ((sex IS NULL)) THEN 'unknown' WHEN NOT ((sex IS NULL)) THEN sex END AS sex
-&lt;SQL&gt; CASE WHEN ((bill_length_mm IS NULL)) THEN 43.3 WHEN NOT ((bill_length_mm IS NULL)) THEN bill_length_mm END AS bill_length_mm
-&lt;SQL&gt; CAST(species = 'Chinstrap' AS NUMERIC) AS species_Chinstrap
-&lt;SQL&gt; CAST(sex = 'male' AS NUMERIC) AS sex_male
-&lt;SQL&gt; bill_length_mm / 5.53764488534842 AS bill_length_mm
-&lt;SQL&gt; species_Chinstrap / 0.39721765160312 AS species_Chinstrap
-&lt;SQL&gt; sex_male / 0.500841815855869 AS sex_male
-&lt;SQL&gt; bill_length_mm - 7.89221731979121 AS bill_length_mm
-&lt;SQL&gt; species_Chinstrap - 0.491701461935901 AS species_Chinstrap
-&lt;SQL&gt; sex_male - 1.02171730434597 AS sex_male
+<pre><code>&lt;SQL&gt; CASE WHEN ((`species` IS NULL)) THEN 'unknown' WHEN NOT ((`species` IS NULL)) THEN `species` END AS species
+&lt;SQL&gt; CASE WHEN ((`sex` IS NULL)) THEN 'unknown' WHEN NOT ((`sex` IS NULL)) THEN `sex` END AS sex
+&lt;SQL&gt; CASE WHEN ((`bill_length_mm` IS NULL)) THEN 43.3 WHEN NOT ((`bill_length_mm` IS NULL)) THEN `bill_length_mm` END AS bill_length_mm
+&lt;SQL&gt; CAST(`species` = 'Chinstrap' AS REAL) AS species_Chinstrap
+&lt;SQL&gt; CAST(`sex` = 'male' AS REAL) AS sex_male
+&lt;SQL&gt; `bill_length_mm` / 5.53764488534842 AS bill_length_mm
+&lt;SQL&gt; `species_Chinstrap` / 0.39721765160312 AS species_Chinstrap
+&lt;SQL&gt; `sex_male` / 0.500841815855869 AS sex_male
+&lt;SQL&gt; `bill_length_mm` - 7.89221731979121 AS bill_length_mm
+&lt;SQL&gt; `species_Chinstrap` - 0.491701461935901 AS species_Chinstrap
+&lt;SQL&gt; `sex_male` - 1.02171730434597 AS sex_male
 &lt;SQL&gt; CASE
-WHEN (sex_male &lt;= -1.02171730434597 AND bill_length_mm &lt;= -0.217474558216316) THEN 3394.140625
-WHEN (sex_male &gt; -1.02171730434597 AND bill_length_mm &lt;= -0.217474558216316) THEN 3985.09615384615
-WHEN (species_Chinstrap &lt;= -0.491701461935901 AND bill_length_mm &gt; -0.217474558216316) THEN 4980.37634408602
-WHEN (species_Chinstrap &gt; -0.491701461935901 AND bill_length_mm &gt; -0.217474558216316) THEN 3757.97872340426
+WHEN (`sex_male` &lt;= -1.02171730434597 AND `bill_length_mm` &lt;= -0.217474558216316) THEN 3394.140625
+WHEN (`sex_male` &gt; -1.02171730434597 AND `bill_length_mm` &lt;= -0.217474558216316) THEN 3985.09615384615
+WHEN (`species_Chinstrap` &lt;= -0.491701461935901 AND `bill_length_mm` &gt; -0.217474558216316) THEN 4980.37634408602
+WHEN (`species_Chinstrap` &gt; -0.491701461935901 AND `bill_length_mm` &gt; -0.217474558216316) THEN 3757.97872340426
 END AS .pred</code></pre>
 </div>
 </div>
 </section>
-<section id="shiny-code" class="slide level2 theme10">
-<h2>Shiny code</h2>
-<p>Generate function</p>
+<section id="shiny-app" class="slide level2 theme10">
+<h2>shiny app</h2>
+</section>
+<section id="shiny-app---function" class="slide level2 theme10">
+<h2>shiny app - function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">orbital_r_fun</span>(orbital_obj, <span class="at">file =</span> <span class="st">"shiny-fun.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">orbital_r_fun</span>(orbital_obj, <span class="at">file =</span> <span class="st">"shiny-fun.R"</span>)</span></code></pre></div>
 </div>
-<p><br></p>
+<div style="height: 50px">
+
+</div>
+<div class="fragment">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>orbital_predict &lt;- function(x) {
@@ -1016,39 +1109,42 @@ with(x, {
 }</code></pre>
 </div>
 </div>
+</div>
 </section>
-<section id="shiny-code-1" class="slide level2 theme10">
-<h2>Shiny code</h2>
-<p>UI</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"species"</span>, <span class="st">"species:"</span>, <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>, <span class="st">"Chinstrap"</span>), <span class="st">"Adelie"</span>)</span>
-<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"island"</span>, <span class="st">"island:"</span>, <span class="fu">c</span>(<span class="st">"Torgersen"</span>, <span class="st">"Biscoe"</span>, <span class="st">"Dream"</span>), <span class="st">"Dream"</span>)</span>
-<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_length_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">50</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
-<span id="cb34-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"bill_depth_mm"</span>, <span class="st">"bill_depth_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">50</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
-<span id="cb34-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"flipper_length_mm"</span>, <span class="st">"flipper_length_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">300</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
-<span id="cb34-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"sex"</span>, <span class="st">"sex:"</span>, <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>, <span class="cn">NA</span>), <span class="st">"male"</span>)</span>
-<span id="cb34-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">textOutput</span>(<span class="st">"weight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="shiny-app---ui" class="slide level2 theme10">
+<h2>shiny app - UI</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"species"</span>, <span class="st">"species:"</span>, <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>, <span class="st">"Chinstrap"</span>), <span class="st">"Adelie"</span>)</span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"island"</span>, <span class="st">"island:"</span>, <span class="fu">c</span>(<span class="st">"Torgersen"</span>, <span class="st">"Biscoe"</span>, <span class="st">"Dream"</span>), <span class="st">"Dream"</span>)</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_length_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">50</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"bill_depth_mm"</span>, <span class="st">"bill_depth_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">50</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">"flipper_length_mm"</span>, <span class="st">"flipper_length_mm:"</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">300</span>, <span class="at">value =</span> <span class="dv">20</span>)</span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">"sex"</span>, <span class="st">"sex:"</span>, <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>, <span class="cn">NA</span>), <span class="st">"male"</span>)</span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">textOutput</span>(<span class="st">"weight"</span>)</span></code></pre></div>
 </section>
-<section id="shiny-code-2" class="slide level2 theme10">
-<h2>Shiny code</h2>
-<p>Server</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"shiny-fun.R"</span>)</span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>  .pred <span class="ot">&lt;-</span> <span class="fu">orbital_predict</span>(<span class="fu">data.frame</span>(</span>
-<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">species =</span> input<span class="sc">$</span>species,</span>
-<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">island =</span> input<span class="sc">$</span>island,</span>
-<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_length_mm =</span> input<span class="sc">$</span>bill_length_mm,</span>
-<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_depth_mm =</span> input<span class="sc">$</span>bill_depth_mm,</span>
-<span id="cb35-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_length_mm =</span> input<span class="sc">$</span>flipper_length_mm,</span>
-<span id="cb35-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> input<span class="sc">$</span>sex</span>
-<span id="cb35-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb35-12"><a href="" aria-hidden="true" tabindex="-1"></a>  .pred</span>
-<span id="cb35-13"><a href="" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="shiny-app---server" class="slide level2 theme10">
+<h2>shiny app - server</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"shiny-fun.R"</span>)</span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>  .pred <span class="ot">&lt;-</span> <span class="fu">orbital_predict</span>(</span>
+<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">species =</span> input<span class="sc">$</span>species,</span>
+<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">island =</span> input<span class="sc">$</span>island,</span>
+<span id="cb31-9"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_length_mm =</span> input<span class="sc">$</span>bill_length_mm,</span>
+<span id="cb31-10"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_depth_mm =</span> input<span class="sc">$</span>bill_depth_mm,</span>
+<span id="cb31-11"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">flipper_length_mm =</span> input<span class="sc">$</span>flipper_length_mm,</span>
+<span id="cb31-12"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex =</span> input<span class="sc">$</span>sex</span>
+<span id="cb31-13"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb31-14"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-15"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="" aria-hidden="true" tabindex="-1"></a>  .pred</span>
+<span id="cb31-17"><a href="" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 </section>
-<section id="section-15" class="slide level2 theme10">
+<section id="section-16" class="slide level2 theme10">
 <h2></h2>
 <pre class="shinylive-r" data-engine="r"><code>#| standalone: true
 library(shiny)
@@ -1105,11 +1201,14 @@ shinyApp(ui = ui, server = server)</code></pre>
 </section>
 <section id="pure-javascript-prediction" class="slide level2 theme11">
 <h2>Pure Javascript prediction</h2>
+<div class="fragment">
 <iframe width="100%" height="700px" src="js-example.html">
 </iframe>
+</div>
 </section>
 <section id="why-use-this-package" class="slide level2 theme12">
 <h2>Why use this package?</h2>
+<div class="fragment">
 <ul>
 <li>Cons
 <ul>
@@ -1117,6 +1216,10 @@ shinyApp(ui = ui, server = server)</code></pre>
 <li>don’t get any input checking</li>
 <li>very new, be careful</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li>Pros
 <ul>
 <li>way smaller or no docker containers needed</li>
@@ -1124,13 +1227,19 @@ shinyApp(ui = ui, server = server)</code></pre>
 <li>code generation</li>
 </ul></li>
 </ul>
+</div>
 <div class="footer">
 <p><a href="https://orbital.tidymodels.org/articles/pros-cons.html" class="uri">https://orbital.tidymodels.org/articles/pros-cons.html</a></p>
 </div>
 </section>
-<section id="thank-you" class="slide level2 theme13">
-<h2>Thank you!</h2>
-<p>TODO: add QR code and links</p>
+<section id="section-17" class="slide level2 theme13">
+<h2></h2>
+<div style="height: 300px">
+
+</div>
+<div class="dodger" style="font-size: 60fpx;">
+<p>Thank you!</p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1185,7 +1294,7 @@ shinyApp(ui = ui, server = server)</code></pre>
         controlsBackArrows: 'faded',
 
         // Display a presentation progress bar
-        progress: true,
+        progress: false,
 
         // Display the page number of the current slide
         slideNumber: false,
@@ -1411,58 +1520,6 @@ shinyApp(ui = ui, server = server)</code></pre>
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
       });
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);

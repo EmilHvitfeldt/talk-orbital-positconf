@@ -1,9 +1,9 @@
 $colors: (
   "lightyellow": #FAF6CC,
   "yellow": #F6DD8B,
+  "lightpink": #f796cc,
   "pink": #E21285,
   "blue": #92E1F4,
-  "orange": #c78c1d,
   "grey": #d2d2d2,
 );
 
@@ -13,10 +13,37 @@ $colors: (
   @return map-get($colors, $color);
 }
 
+// https://codepen.io/acezard/details/MymqWO
+@function stroke($stroke, $color) {
+  $shadow: (
+  );
+$from: $stroke*-1;
+
+@for $i from $from through $stroke {
+  @for $j from $from through $stroke {
+    $shadow: append($shadow, $i*1px $j*1px 0 $color, comma);
+  }
+}
+
+@return $shadow;
+}
+
+@mixin stroke($stroke, $color) {
+  text-shadow: stroke($stroke, $color);
+}
+
 /*-- scss:defaults --*/
+
+@font-face {
+  font-family: 'Dodger';
+  src: url("../../../../../good_times_rg.ttf") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 $body-color: theme-color("lightyellow");
 $link-color: theme-color("pink");
+$code-color: theme-color("blue");
 
 /*-- scss:rules --*/
 
@@ -30,6 +57,116 @@ $link-color: theme-color("pink");
   }
 }
 
+.dodger {
+  font-family: 'Dodger';
+}
+
+.title {
+  font-family: "Dodger";
+  color: theme-color("blue");
+  @include stroke(2, theme-color("lightyellow"));
+}
+
+.reveal {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Dodger";
+    color: theme-color("yellow");
+  }
+
+  // stop height restriction on code chunks 
+  pre.sourceCode code {
+    max-height: 1000px;
+  }
+
+  pre code {
+    max-height: 500px;
+  }
+
+  // code chunks
+  div.sourceCode code,
+  div.sourceCode,
+  pre,
+  pre code,
+  .column-output-location .column:first-of-type div.sourceCode {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
+
+  .slides section .fragment {
+    &.tmp-hl-pink {
+      opacity: 1;
+      visibility: inherit;
+
+      &.current-fragment {
+        color: theme-color("lightpink");
+      }
+    }
+
+    &.hl-pink {
+      opacity: 1;
+      visibility: inherit;
+
+      &.visible,
+      &.current-fragment {
+        color: theme-color("lightpink");
+
+      }
+    }
+
+    &.hl-grey {
+      opacity: 1;
+      visibility: inherit;
+
+      &.visible,
+      &.current-fragment {
+        color: theme-color("grey");
+      }
+    }
+
+  }
+}
+
+// code highlighting
+pre>code.sourceCode>span {
+  color: $body-color;
+}
+
+code span {
+
+  &.dv,
+  &.fl,
+  &.cn,
+  &.st {
+    color: theme-color("lightpink");
+  }
+
+  &.fu {
+    color: theme-color("blue");
+  }
+
+  &.ot,
+  &.sc {
+    color: theme-color("lightyellow");
+  }
+
+  &.at,
+  &.cf {
+    color: theme-color("yellow");
+  }
+
+  &.co,
+  &.an {
+    color: theme-color("grey");
+  }
+}
+
+// custom monospaced text
 .mono {
   font-family: monospace;
 
@@ -41,39 +178,6 @@ $link-color: theme-color("pink");
   &.margin p {
     margin-top: 16px;
   }
-}
-
-.reveal .slides section .fragment {
-  &.tmp-hl-orange {
-    opacity: 1;
-    visibility: inherit;
-
-    &.current-fragment {
-      color: theme-color("orange");
-    }
-  }
-
-  &.hl-orange {
-    opacity: 1;
-    visibility: inherit;
-
-    &.visible,
-    &.current-fragment {
-      color: theme-color("orange");
-
-    }
-  }
-
-  &.hl-grey {
-    opacity: 1;
-    visibility: inherit;
-
-    &.visible,
-    &.current-fragment {
-      color: theme-color("grey");
-    }
-  }
-
 }
 
 // Background images
@@ -99,4 +203,14 @@ $link-color: theme-color("pink");
 // Shinylive
 .shinylive-wrapper {
   height: 600px;
+}
+
+.size40>* {
+  font-size: 40px;
+}
+
+.highlight-last {
+  .current-fragment {
+    color: theme-color("yellow");
+  }
 }
