@@ -668,16 +668,28 @@ library(shiny)
 library(bslib)
 library(dplyr)
 
-ui <- flowLayout(
-  selectInput("species", "species:", c("Adelie", "Gentoo", "Chinstrap"), "Adelie"),
-  selectInput("island", "island:", c("Torgersen", "Biscoe", "Dream"), "Dream"),
-  sliderInput("bill_length_mm", "bill_length_mm:", min = 1, max = 50, value = 20),
-  sliderInput("bill_depth_mm", "bill_depth_mm:", min = 1, max = 50, value = 20),
-  sliderInput("flipper_length_mm", "flipper_length_mm:", min = 1, max = 300, value = 20),
-  selectInput("sex", "sex:", c("male", "female", NA), "male"),
-
-  "Predicted weight:",
-  textOutput("weight")
+ui <- page_fillable(
+  layout_columns(
+     card(
+      selectInput("species", "species:", c("Adelie", "Gentoo", "Chinstrap"), "Adelie"),
+      selectInput("island", "island:", c("Torgersen", "Biscoe", "Dream"), "Dream")
+     ),
+     card(
+       selectInput("sex", "sex:", c("male", "female", NA), "male"),
+       sliderInput("flipper_length_mm", "flipper_length_mm:", min = 1, max = 300, value = 20)
+     ),
+     card(
+      sliderInput("bill_length_mm", "bill_length_mm:", min = 1, max = 50, value = 20),
+      sliderInput("bill_depth_mm", "bill_depth_mm:", min = 1, max = 50, value = 20)
+     )
+  ),
+  card(
+    card_header("Predicted Weight"),
+    textOutput("weight")
+  ),
+  tags$head(tags$style("body {font-size: 36px;}")),
+  tags$head(tags$style("div.card-header {font-size: 36px !important;}")),
+  tags$head(tags$style(".shiny-text-output {color:#E21285; font-size: 100px; text-align: center;}"))
 )
 
 server <- function(input, output) {
@@ -700,18 +712,20 @@ server <- function(input, output) {
       })
     }
 
-  output$weight <- renderText({
-    .pred <- orbital_predict(data.frame(
-      species = input$species,
-      island = input$island,
-      bill_length_mm = input$bill_length_mm,
-      bill_depth_mm = input$bill_depth_mm,
-      flipper_length_mm = input$flipper_length_mm,
-      sex = input$sex
-    ))
-    .pred
-  })
-
+    output$weight <- renderText({
+      .pred <- orbital_predict(
+        data.frame(
+          species = input$species,
+          island = input$island,
+          bill_length_mm = input$bill_length_mm,
+          bill_depth_mm = input$bill_depth_mm,
+          flipper_length_mm = input$flipper_length_mm,
+          sex = input$sex
+        )
+      )
+    
+      .pred
+    })
 }
 
 shinyApp(ui = ui, server = server)
@@ -722,7 +736,7 @@ shinyApp(ui = ui, server = server)
 :::: fragment
 <iframe
   width="100%"
-  height="700px"
+  height="600px"
   src="js-example.html">
 </iframe>
 :::
