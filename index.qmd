@@ -536,6 +536,17 @@ new_penguins <- copy_to(con, penguins_test)
 predict(orbital_obj, new_penguins)
 ```
 
+## predicting with arrow {.theme8 auto-animate="true"}
+
+```{r}
+#| output-location: column
+library(arrow)
+
+new_penguins <- as_arrow_table(penguins_test)
+
+predict(orbital_obj, new_penguins)
+```
+
 ## predicting with duckdb {.theme8 auto-animate="true"}
 
 ```{r}
@@ -544,17 +555,6 @@ library(duckdb)
 
 con <- dbConnect(duckdb(dbdir = ":memory:"))
 new_penguins <- copy_to(con, penguins_test)
-
-predict(orbital_obj, new_penguins)
-```
-
-## predicting with arrow {.theme8 auto-animate="true"}
-
-```{r}
-#| output-location: column
-library(arrow)
-
-new_penguins <- as_arrow_table(penguins_test)
 
 predict(orbital_obj, new_penguins)
 ```

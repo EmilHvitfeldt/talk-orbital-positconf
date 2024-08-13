@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Sun Aug 11 11:12:22 PDT 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0191-42a4-3150-00002b968870 
-on database directory memory:/Users/emilhvitfeldt/Github/talk-orbital-positconf/databaseName=metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@3efba51c 
+Tue Aug 13 12:27:26 PDT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0191-4d35-a236-00002ad836c8 
+on database directory memory:/Users/emilhvitfeldt/Github/talk-orbital-positconf/databaseName=metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@2a8b5928 
 Loaded from file:/Users/emilhvitfeldt/spark/spark-3.3.4-bin-hadoop3/jars/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_333-b02

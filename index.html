@@ -953,46 +953,15 @@
 </div>
 </div>
 </section>
-<section id="predicting-with-duckdb" class="slide level2 theme8" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">predicting with duckdb</h2>
-<div class="cell columns column-output-location">
-<div class="column">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb22-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
-<span id="cb22-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">duckdb</span>(<span class="at">dbdir =</span> <span class="st">":memory:"</span>))</span>
-<span id="cb22-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span>
-<span id="cb22-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-stdout">
-<pre><code># Source:   SQL [?? x 1]
-# Database: DuckDB v1.0.0 [root@Darwin 23.5.0:R 4.4.0/:memory:]
-   .pred
-   &lt;dbl&gt;
- 1 3985.
- 2 3394.
- 3 3394.
- 4 3394.
- 5 3394.
- 6 3985.
- 7 3394.
- 8 3394.
- 9 3394.
-10 3985.
-# ℹ more rows</code></pre>
-</div>
-</div>
-</div>
-</section>
 <section id="predicting-with-arrow" class="slide level2 theme8" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">predicting with arrow</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
-<span id="cb24-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">as_arrow_table</span>(penguins_test)</span>
-<span id="cb24-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb22-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
+<span id="cb22-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">as_arrow_table</span>(penguins_test)</span>
+<span id="cb22-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>Table (query)
@@ -1015,6 +984,37 @@
 ][0]), {to_type=double, allow_int_overflow=false, allow_time_truncate=false, allow_time_overflow=false, allow_decimal_truncate=false, allow_float_truncate=false, allow_invalid_utf8=false}), {to_type=double, allow_int_overflow=false, allow_time_truncate=false, allow_time_overflow=false, allow_decimal_truncate=false, allow_float_truncate=false, allow_invalid_utf8=false}), cast(0.39721765160312, {to_type=double, allow_int_overflow=false, allow_time_truncate=false, allow_time_overflow=false, allow_decimal_truncate=false, allow_float_truncate=false, allow_invalid_utf8=false})), 0.491701461935901) &gt; -0.491701461935901) and (subtract_checked(divide(cast(if_else(is_null(bill_length_mm, {nan_is_null=true}), 43.3, bill_length_mm), {to_type=double, allow_int_overflow=false, allow_time_truncate=false, allow_time_overflow=false, allow_decimal_truncate=false, allow_float_truncate=false, allow_invalid_utf8=false}), cast(5.53764488534842, {to_type=double, allow_int_overflow=false, allow_time_truncate=false, allow_time_overflow=false, allow_decimal_truncate=false, allow_float_truncate=false, allow_invalid_utf8=false})), 7.89221731979121) &gt; -0.217474558216316))}, 3394.140625, 3985.09615384615, 4980.37634408602, 3757.97872340426))
 
 See $.data for the source Arrow object</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="predicting-with-duckdb" class="slide level2 theme8" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">predicting with duckdb</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
+<span id="cb24-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">duckdb</span>(<span class="at">dbdir =</span> <span class="st">":memory:"</span>))</span>
+<span id="cb24-4" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, penguins_test)</span>
+<span id="cb24-5" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(orbital_obj, new_penguins)</span></code></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [?? x 1]
+# Database: DuckDB v1.0.0 [root@Darwin 23.5.0:R 4.4.0/:memory:]
+   .pred
+   &lt;dbl&gt;
+ 1 3985.
+ 2 3394.
+ 3 3394.
+ 4 3394.
+ 5 3394.
+ 6 3985.
+ 7 3394.
+ 8 3394.
+ 9 3394.
+10 3985.
+# ℹ more rows</code></pre>
 </div>
 </div>
 </div>
